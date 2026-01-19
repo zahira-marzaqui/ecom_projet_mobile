@@ -11,20 +11,20 @@ class VendeurProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mon Profil'),
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFFFFFFFF),
+        foregroundColor: const Color(0xFF000000),
       ),
       body: Container(
-        color: Colors.black,
+        color: const Color(0xFFFFFFFF),
         child: currentUser == null
             ? const Center(
                 child: Text(
                   'Aucun utilisateur connecté',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Color(0xFF000000)),
                 ),
               )
             : SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -37,44 +37,43 @@ class VendeurProfileScreen extends StatelessWidget {
                             height: 100,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                colors: [
-                                  Colors.blueAccent,
-                                  Colors.blue.shade700,
-                                ],
+                              color: const Color(0xFF000000).withValues(alpha: 0.1),
+                              border: Border.all(
+                                color: const Color(0xFF000000),
+                                width: 2,
                               ),
                             ),
                             child: const Icon(
                               Icons.person,
                               size: 50,
-                              color: Colors.white,
+                              color: Color(0xFF000000),
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 24),
                           Text(
                             '${currentUser['firstName'] ?? ''} ${currentUser['lastName'] ?? ''}'.trim().isEmpty
                                 ? currentUser['username'] ?? currentUser['email'] ?? 'Vendeur'
                                 : '${currentUser['firstName'] ?? ''} ${currentUser['lastName'] ?? ''}'.trim(),
                             style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF000000),
+                              fontSize: 28,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.5,
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 12),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: Colors.blueAccent.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.blueAccent),
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF000000),
                             ),
                             child: const Text(
                               'VENDEUR',
                               style: TextStyle(
-                                color: Colors.blueAccent,
+                                color: Color(0xFFFFFFFF),
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
+                                letterSpacing: 1.2,
                               ),
                             ),
                           ),
@@ -120,11 +119,12 @@ class VendeurProfileScreen extends StatelessWidget {
 
   Widget _buildSectionTitle(String title) {
     return Text(
-      title,
-      style: TextStyle(
-        color: Colors.grey.shade300,
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
+      title.toUpperCase(),
+      style: const TextStyle(
+        color: Color(0xFF666666),
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 1.2,
       ),
     );
   }
@@ -135,9 +135,11 @@ class VendeurProfileScreen extends StatelessWidget {
     required String value,
   }) {
     return Card(
-      color: Colors.grey.shade900,
+      color: const Color(0xFFFFFFFF),
+      elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(0),
+        side: const BorderSide(color: Color(0xFFE5E5E5), width: 1),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -146,10 +148,13 @@ class VendeurProfileScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.blueAccent.withValues(alpha: 0.2),
-                borderRadius: BorderRadius.circular(8),
+                color: const Color(0xFF000000).withValues(alpha: 0.1),
+                border: Border.all(
+                  color: const Color(0xFF000000),
+                  width: 1,
+                ),
               ),
-              child: Icon(icon, color: Colors.blueAccent, size: 24),
+              child: Icon(icon, color: const Color(0xFF000000), size: 24),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -157,19 +162,22 @@ class VendeurProfileScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    label,
-                    style: TextStyle(
-                      color: Colors.grey.shade400,
-                      fontSize: 12,
+                    label.toUpperCase(),
+                    style: const TextStyle(
+                      color: Color(0xFF666666),
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.2,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     value,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: Color(0xFF000000),
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.2,
                     ),
                   ),
                 ],

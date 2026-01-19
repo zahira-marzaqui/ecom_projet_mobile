@@ -13,11 +13,11 @@ class FavoritesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mes Favoris'),
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFFFFFFFF),
+        foregroundColor: const Color(0xFF000000),
       ),
       body: Container(
-        color: Colors.black,
+        color: const Color(0xFFFFFFFF),
         child: ValueListenableBuilder<List<Map<String, dynamic>>>(
           valueListenable: favoritesService.favorites,
           builder: (context, favorites, child) {
@@ -29,23 +29,25 @@ class FavoritesScreen extends StatelessWidget {
                     Icon(
                       Icons.favorite_border,
                       size: 100,
-                      color: Colors.grey.shade600,
+                      color: const Color(0xFF999999),
                     ),
-                    const SizedBox(height: 20),
-                    Text(
+                    const SizedBox(height: 32),
+                    const Text(
                       'Aucun favori',
                       style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey.shade400,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        color: Color(0xFF000000),
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.5,
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    Text(
+                    const SizedBox(height: 12),
+                    const Text(
                       'Ajoutez des produits à vos favoris',
                       style: TextStyle(
                         fontSize: 14,
-                        color: Colors.grey.shade600,
+                        color: Color(0xFF666666),
+                        letterSpacing: 0.25,
                       ),
                     ),
                   ],
@@ -54,12 +56,12 @@ class FavoritesScreen extends StatelessWidget {
             }
 
             return GridView.builder(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(24),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.58,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
+                childAspectRatio: 0.44,
+                crossAxisSpacing: 24,
+                mainAxisSpacing: 24,
               ),
               itemCount: favorites.length,
               itemBuilder: (context, index) {
@@ -72,20 +74,16 @@ class FavoritesScreen extends StatelessWidget {
 
                 return Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Colors.grey.shade900,
-                        Colors.grey.shade800,
-                      ],
+                    color: const Color(0xFFFFFFFF),
+                    border: Border.all(
+                      color: const Color(0xFFE5E5E5),
+                      width: 1,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.3),
-                        blurRadius: 8,
-                        offset: const Offset(0, 4),
+                        color: const Color(0xFF000000).withValues(alpha: 0.05),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
                       ),
                     ],
                   ),
@@ -94,131 +92,100 @@ class FavoritesScreen extends StatelessWidget {
                     children: [
                       // Image avec bouton favori
                       Expanded(
-                        flex: 3,
+                        flex: 4,
                         child: Stack(
                           children: [
                             Container(
                               width: double.infinity,
-                              decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.vertical(
-                                  top: Radius.circular(16),
-                                ),
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Colors.grey.shade800,
-                                    Colors.grey.shade900,
-                                  ],
-                                ),
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFF5F5F5),
                               ),
-                              child: ClipRRect(
-                                borderRadius: const BorderRadius.vertical(
-                                  top: Radius.circular(16),
-                                ),
-                                child: imageUrl != null && imageUrl.isNotEmpty
-                                    ? Image.network(
-                                        imageUrl,
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
-                                        loadingBuilder: (context, child, loadingProgress) {
-                                          if (loadingProgress == null) return child;
-                                          return Container(
-                                            color: Colors.grey.shade800,
-                                            child: Center(
-                                              child: CircularProgressIndicator(
-                                                value: loadingProgress.expectedTotalBytes != null
-                                                    ? loadingProgress.cumulativeBytesLoaded /
-                                                        loadingProgress.expectedTotalBytes!
-                                                    : null,
-                                                strokeWidth: 2,
-                                                valueColor: const AlwaysStoppedAnimation<Color>(
-                                                  Colors.blueAccent,
-                                                ),
+                              child: imageUrl != null && imageUrl.isNotEmpty
+                                  ? Image.network(
+                                      imageUrl,
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      fit: BoxFit.contain,
+                                      loadingBuilder: (context, child, loadingProgress) {
+                                        if (loadingProgress == null) return child;
+                                        return Container(
+                                          color: const Color(0xFFF5F5F5),
+                                          child: const Center(
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                              valueColor: AlwaysStoppedAnimation<Color>(
+                                                Color(0xFF000000),
                                               ),
                                             ),
-                                          );
-                                        },
-                                        errorBuilder: (_, __, ___) => Container(
-                                          color: Colors.grey.shade800,
-                                          child: const Icon(
-                                            Icons.image_not_supported,
-                                            size: 40,
-                                            color: Colors.grey,
                                           ),
+                                        );
+                                      },
+                                      errorBuilder: (_, __, ___) => Container(
+                                        color: const Color(0xFFF5F5F5),
+                                        child: const Icon(
+                                          Icons.image_not_supported,
+                                          size: 40,
+                                          color: Color(0xFF999999),
                                         ),
-                                      )
-                                    : const Icon(
-                                        Icons.shopping_bag,
-                                        size: 40,
-                                        color: Colors.grey,
                                       ),
-                              ),
+                                    )
+                                  : const Icon(
+                                      Icons.shopping_bag,
+                                      size: 40,
+                                      color: Color(0xFF999999),
+                                    ),
                             ),
                             // Bouton retirer des favoris
                             Positioned(
-                              top: 10,
-                              right: 10,
+                              bottom: 12,
+                              right: 12,
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.red.shade600,
+                                  color: const Color(0xFFFFFFFF),
                                   shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.red.withValues(alpha: 0.5),
-                                      blurRadius: 4,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
+                                  border: Border.all(
+                                    color: const Color(0xFF000000),
+                                    width: 1,
+                                  ),
                                 ),
                                 child: IconButton(
-                                  icon: const Icon(Icons.favorite, color: Colors.white),
+                                  icon: const Icon(Icons.favorite, color: Color(0xFF000000), size: 20),
                                   onPressed: () {
                                     favoritesService.removeFromFavorites(product);
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text('$title retiré des favoris'),
                                         duration: const Duration(seconds: 2),
-                                        backgroundColor: Colors.red,
+                                        backgroundColor: const Color(0xFF000000),
                                       ),
                                     );
                                   },
                                   iconSize: 20,
+                                  padding: const EdgeInsets.all(8),
+                                  constraints: const BoxConstraints(),
                                 ),
                               ),
                             ),
                             // Badge de réduction
                             if (discount > 0)
                               Positioned(
-                                top: 10,
-                                left: 10,
+                                top: 12,
+                                right: 12,
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 8,
-                                    vertical: 5,
+                                    vertical: 4,
                                   ),
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Colors.red.shade600,
-                                        Colors.red.shade700,
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.circular(20),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.red.withValues(alpha: 0.5),
-                                        blurRadius: 4,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFF000000),
                                   ),
                                   child: Text(
                                     '-${discount.toStringAsFixed(0)}%',
                                     style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 11,
+                                      color: Color(0xFFFFFFFF),
+                                      fontSize: 10,
                                       fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.5,
                                     ),
                                   ),
                                 ),
@@ -230,10 +197,10 @@ class FavoritesScreen extends StatelessWidget {
                       Expanded(
                         flex: 2,
                         child: Container(
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
                                 title,
@@ -241,29 +208,44 @@ class FavoritesScreen extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  height: 1.2,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF000000),
+                                  height: 1.15,
+                                  letterSpacing: 0.15,
                                 ),
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              const SizedBox(height: 4),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  if (discount > 0)
-                                    Text(
-                                      '${price.toStringAsFixed(2)} \$',
-                                      style: TextStyle(
-                                        fontSize: 9,
-                                        color: Colors.grey.shade500,
-                                        decoration: TextDecoration.lineThrough,
-                                      ),
-                                    ),
-                                  Text(
-                                    '${finalPrice.toStringAsFixed(2)} \$',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.green.shade400,
+                                  Flexible(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        if (discount > 0)
+                                          Padding(
+                                            padding: const EdgeInsets.only(bottom: 0),
+                                            child: Text(
+                                              '${price.toStringAsFixed(2)} \$',
+                                              style: const TextStyle(
+                                                fontSize: 9,
+                                                color: Color(0xFF999999),
+                                                decoration: TextDecoration.lineThrough,
+                                              ),
+                                            ),
+                                          ),
+                                        Text(
+                                          '${finalPrice.toStringAsFixed(2)} \$',
+                                          style: const TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xFF000000),
+                                            letterSpacing: 0.2,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],
@@ -274,31 +256,35 @@ class FavoritesScreen extends StatelessWidget {
                       ),
                       // Bouton Ajouter au panier
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                        padding: const EdgeInsets.fromLTRB(12, 0, 12, 10),
                         child: SizedBox(
                           width: double.infinity,
-                          child: ElevatedButton.icon(
+                          child: ElevatedButton(
                             onPressed: () {
                               cartService.addToCart(product);
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text('$title ajouté au panier!'),
                                   duration: const Duration(seconds: 2),
-                                  backgroundColor: Colors.green,
+                                  backgroundColor: const Color(0xFF000000),
                                 ),
                               );
                             },
-                            icon: const Icon(Icons.add_shopping_cart, size: 16),
-                            label: const Text(
-                              'Ajouter au panier',
-                              style: TextStyle(fontSize: 12),
-                            ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blueAccent,
-                              foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 6),
+                              backgroundColor: const Color(0xFF000000),
+                              foregroundColor: const Color(0xFFFFFFFF),
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              minimumSize: const Size(0, 38),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                            ),
+                            child: const Text(
+                              'AJOUTER AU PANIER',
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.8,
                               ),
                             ),
                           ),

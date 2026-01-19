@@ -46,7 +46,7 @@ class _VendeurAddProductScreenState extends State<VendeurAddProductScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Erreur: Vous devez être connecté pour ajouter un produit'),
-          backgroundColor: Colors.red,
+          backgroundColor: Color(0xFF000000),
         ),
       );
       return;
@@ -95,7 +95,7 @@ class _VendeurAddProductScreenState extends State<VendeurAddProductScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Produit ajouté avec succès!'),
-            backgroundColor: Colors.green,
+            backgroundColor: Color(0xFF000000),
             duration: Duration(seconds: 2),
           ),
         );
@@ -106,7 +106,7 @@ class _VendeurAddProductScreenState extends State<VendeurAddProductScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Erreur lors de l\'ajout: $e'),
-            backgroundColor: Colors.red,
+            backgroundColor: const Color(0xFF000000),
           ),
         );
       }
@@ -124,14 +124,14 @@ class _VendeurAddProductScreenState extends State<VendeurAddProductScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ajouter un produit'),
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFFFFFFFF),
+        foregroundColor: const Color(0xFF000000),
       ),
       body: Container(
-        color: Colors.black,
+        color: const Color(0xFFFFFFFF),
         child: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(24),
             child: Form(
               key: _formKey,
               child: Column(
@@ -278,11 +278,11 @@ class _VendeurAddProductScreenState extends State<VendeurAddProductScreen> {
                   ElevatedButton(
                     onPressed: _isLoading ? null : _addProduct,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      backgroundColor: const Color(0xFF000000),
+                      foregroundColor: const Color(0xFFFFFFFF),
+                      padding: const EdgeInsets.symmetric(vertical: 18),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(0),
                       ),
                     ),
                     child: _isLoading
@@ -291,12 +291,16 @@ class _VendeurAddProductScreenState extends State<VendeurAddProductScreen> {
                       width: 20,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                        valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFFFFFFF)),
                       ),
                     )
                         : const Text(
-                      'Ajouter le produit',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      'AJOUTER LE PRODUIT',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1.5,
+                      ),
                     ),
                   ),
                 ],
@@ -318,35 +322,51 @@ class _VendeurAddProductScreenState extends State<VendeurAddProductScreen> {
   }) {
     return TextFormField(
       controller: controller,
-      style: const TextStyle(color: Colors.white),
+      style: const TextStyle(
+        color: Color(0xFF000000),
+        fontSize: 15,
+        letterSpacing: 0.3,
+      ),
       maxLines: maxLines,
       keyboardType: keyboardType,
       validator: validator,
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: const TextStyle(color: Colors.grey),
-        prefixIcon: Icon(icon, color: Colors.blueAccent),
+        labelStyle: const TextStyle(
+          color: Color(0xFF999999),
+          fontSize: 13,
+          fontWeight: FontWeight.w300,
+          letterSpacing: 0.5,
+        ),
+        floatingLabelStyle: const TextStyle(
+          color: Color(0xFF000000),
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+          letterSpacing: 0.5,
+        ),
+        prefixIcon: Icon(icon, color: const Color(0xFF666666), size: 20),
         filled: true,
-        fillColor: Colors.grey.shade900,
+        fillColor: const Color(0xFFFFFFFF),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade700),
+          borderRadius: BorderRadius.circular(0),
+          borderSide: const BorderSide(color: Color(0xFFE5E5E5), width: 1),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade700),
+          borderRadius: BorderRadius.circular(0),
+          borderSide: const BorderSide(color: Color(0xFFE5E5E5), width: 1),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.blueAccent, width: 2),
+          borderRadius: BorderRadius.circular(0),
+          borderSide: const BorderSide(color: Color(0xFF000000), width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(0),
+          borderSide: const BorderSide(color: Color(0xFF000000), width: 1),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.red, width: 2),
+          borderRadius: BorderRadius.circular(0),
+          borderSide: const BorderSide(color: Color(0xFF000000), width: 1.5),
         ),
       ),
     );

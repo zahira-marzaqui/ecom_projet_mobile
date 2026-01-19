@@ -36,7 +36,7 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('${product['title']} supprimé avec succès'),
-            backgroundColor: Colors.green,
+            backgroundColor: const Color(0xFF000000),
             duration: const Duration(seconds: 2),
           ),
         );
@@ -46,8 +46,8 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Erreur lors de la suppression'),
-            backgroundColor: Colors.red,
-            duration: const Duration(seconds: 2),
+            backgroundColor: Color(0xFF000000),
+            duration: Duration(seconds: 2),
           ),
         );
       }
@@ -58,26 +58,26 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey.shade900,
+        backgroundColor: const Color(0xFFFFFFFF),
         title: const Text(
           'Supprimer le produit',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Color(0xFF000000)),
         ),
         content: Text(
           'Êtes-vous sûr de vouloir supprimer "${product['title']}" ?\nCette action est irréversible.',
-          style: const TextStyle(color: Colors.grey),
+          style: const TextStyle(color: Color(0xFF666666)),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Annuler', style: TextStyle(color: Colors.grey)),
+            child: const Text('Annuler', style: TextStyle(color: Color(0xFF666666))),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(context);
               _deleteProduct(product);
             },
-            child: const Text('Supprimer', style: TextStyle(color: Colors.red)),
+            child: const Text('Supprimer', style: TextStyle(color: Color(0xFF000000))),
           ),
         ],
       ),
@@ -126,20 +126,13 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
 
   Widget _buildDrawer(BuildContext context, Map<String, dynamic>? currentUser) {
     return Drawer(
-      backgroundColor: Colors.grey.shade900,
+      backgroundColor: const Color(0xFFFFFFFF),
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Colors.blueAccent,
-                  Colors.blue.shade700,
-                ],
-              ),
+            decoration: const BoxDecoration(
+              color: Color(0xFFFFFFFF),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,15 +143,15 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
                   height: 60,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white.withValues(alpha: 0.2),
+                    color: const Color(0xFF000000).withValues(alpha: 0.1),
                   ),
                   child: const Icon(
                     Icons.person,
                     size: 30,
-                    color: Colors.white,
+                    color: Color(0xFF000000),
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 16),
                 Text(
                   currentUser != null
                       ? (currentUser['firstName'] != null || currentUser['lastName'] != null
@@ -166,16 +159,17 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
                           : currentUser['username'] ?? currentUser['email'] ?? 'Vendeur')
                       : 'Vendeur',
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Color(0xFF000000),
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 0.5,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   currentUser?['email'] ?? 'email@example.com',
-                  style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.8),
+                  style: const TextStyle(
+                    color: Color(0xFF666666),
                     fontSize: 14,
                   ),
                 ),
@@ -183,36 +177,37 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.person, color: Colors.blueAccent),
-            title: const Text('Mon Profil', style: TextStyle(color: Colors.white)),
+            leading: const Icon(Icons.person, color: Color(0xFF000000)),
+            title: const Text('Mon Profil', style: TextStyle(color: Color(0xFF000000))),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).pushNamed('/vendeur-profile');
             },
           ),
           ListTile(
-            leading: const Icon(Icons.settings, color: Colors.blueAccent),
-            title: const Text('Paramètres', style: TextStyle(color: Colors.white)),
+            leading: const Icon(Icons.settings, color: Color(0xFF000000)),
+            title: const Text('Paramètres', style: TextStyle(color: Color(0xFF000000))),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).pushNamed('/vendeur-settings');
             },
           ),
-          const Divider(color: Colors.grey),
+          const Divider(color: Color(0xFFE5E5E5)),
           const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
-              'Actions',
+              'ACTIONS',
               style: TextStyle(
-                color: Colors.grey,
+                color: Color(0xFF666666),
                 fontSize: 12,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.2,
               ),
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.add_circle, color: Colors.blueAccent),
-            title: const Text('Ajouter un produit', style: TextStyle(color: Colors.white)),
+            leading: const Icon(Icons.add_circle, color: Color(0xFF000000)),
+            title: const Text('Ajouter un produit', style: TextStyle(color: Color(0xFF000000))),
             onTap: () async {
               Navigator.pop(context);
               final result = await Navigator.of(context).pushNamed('/vendeur-add-product');
@@ -222,16 +217,16 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.home, color: Colors.blueAccent),
-            title: const Text('Accueil', style: TextStyle(color: Colors.white)),
+            leading: const Icon(Icons.home, color: Color(0xFF000000)),
+            title: const Text('Accueil', style: TextStyle(color: Color(0xFF000000))),
             onTap: () {
               Navigator.pop(context);
             },
           ),
-          const Divider(color: Colors.grey),
+          const Divider(color: Color(0xFFE5E5E5)),
           ListTile(
-            leading: const Icon(Icons.logout, color: Colors.red),
-            title: const Text('Déconnexion', style: TextStyle(color: Colors.red)),
+            leading: const Icon(Icons.logout, color: Color(0xFF000000)),
+            title: const Text('Déconnexion', style: TextStyle(color: Color(0xFF000000))),
             onTap: () {
               Navigator.pop(context);
               MongoDatabase.logout();
@@ -251,11 +246,11 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
       drawer: _buildDrawer(context, currentUser),
       appBar: AppBar(
         title: Text(_vendeurName != null ? 'Dashboard - $_vendeurName' : 'Vendeur Dashboard'),
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFFFFFFFF),
+        foregroundColor: const Color(0xFF000000),
         actions: [
           IconButton(
-            icon: const Icon(Icons.add_circle),
+            icon: const Icon(Icons.add_circle, color: Color(0xFF000000)),
             tooltip: 'Ajouter un produit',
             onPressed: () async {
               final result = await Navigator.of(context).pushNamed('/vendeur-add-product');
@@ -265,12 +260,12 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
             },
           ),
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh, color: Color(0xFF000000)),
             tooltip: 'Rafraîchir les produits',
             onPressed: _loadProducts,
           ),
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.logout, color: Color(0xFF000000)),
             tooltip: 'Logout',
             onPressed: () {
               MongoDatabase.logout();
@@ -280,11 +275,11 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
         ],
       ),
       body: Container(
-        color: Colors.black,
+        color: const Color(0xFFFFFFFF),
         child: _isLoading
             ? const Center(
                 child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blueAccent),
+                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF000000)),
                 ),
               )
             : !MongoDatabase.isConnected || MongoDatabase.currentUser == null
@@ -292,13 +287,13 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
                     child: Text(
                       'Base de données non connectée.\nLes produits ne peuvent pas être chargés.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Color(0xFF000000)),
                     ),
                   )
                 : _products.isEmpty
                     ? RefreshIndicator(
                         onRefresh: _loadProducts,
-                        color: Colors.blueAccent,
+                        color: const Color(0xFF000000),
                         child: const SingleChildScrollView(
                           physics: AlwaysScrollableScrollPhysics(),
                           child: SizedBox(
@@ -306,7 +301,7 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
                             child: Center(
                               child: Text(
                                 'Aucun produit assigné.\nTirez vers le bas pour rafraîchir.',
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Color(0xFF000000)),
                               ),
                             ),
                           ),
@@ -314,41 +309,56 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
                       )
                     : RefreshIndicator(
                         onRefresh: _loadProducts,
-                        color: Colors.blueAccent,
+                        color: const Color(0xFF000000),
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Card(
-                                color: Colors.grey.shade900,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Row(
-                                    children: [
-                                      const Icon(Icons.inventory_2, color: Colors.blueAccent),
-                                      const SizedBox(width: 8),
-                                      Text(
-                                        '${_products.length} produit(s)',
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                              padding: const EdgeInsets.all(24.0),
+                              child: Container(
+                                padding: const EdgeInsets.all(16.0),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFFFFFFF),
+                                  border: Border.all(
+                                    color: const Color(0xFF000000),
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF000000).withValues(alpha: 0.1),
+                                        border: Border.all(
+                                          color: const Color(0xFF000000),
+                                          width: 1,
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                      child: const Icon(Icons.inventory_2, color: Color(0xFF000000), size: 24),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Text(
+                                      '${_products.length} PRODUIT(S)',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xFF000000),
+                                        letterSpacing: 1.2,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
                             Expanded(
                               child: GridView.builder(
                                 physics: const AlwaysScrollableScrollPhysics(),
-                                padding: const EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(24),
                                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
-                                  childAspectRatio: 0.58,
-                                  crossAxisSpacing: 16,
-                                  mainAxisSpacing: 16,
+                                  childAspectRatio: 0.42,
+                                  crossAxisSpacing: 24,
+                                  mainAxisSpacing: 24,
                                 ),
                                 itemCount: _products.length,
                                 itemBuilder: (context, index) {
@@ -360,18 +370,14 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
 
                                   return Container(
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16),
-                                      gradient: LinearGradient(
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                        colors: [
-                                          Colors.grey.shade900,
-                                          Colors.grey.shade800,
-                                        ],
+                                      color: const Color(0xFFFFFFFF),
+                                      border: Border.all(
+                                        color: const Color(0xFF000000),
+                                        width: 1.5,
                                       ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.black.withValues(alpha: 0.3),
+                                          color: const Color(0xFF000000).withValues(alpha: 0.08),
                                           blurRadius: 8,
                                           offset: const Offset(0, 4),
                                         ),
@@ -379,189 +385,137 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
                                     ),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Expanded(
-                                          flex: 3,
+                                          flex: 4,
                                           child: Stack(
                                             children: [
                                               Container(
                                                 width: double.infinity,
-                                                decoration: BoxDecoration(
-                                                  borderRadius: const BorderRadius.vertical(
-                                                    top: Radius.circular(16),
-                                                  ),
-                                                  gradient: LinearGradient(
-                                                    begin: Alignment.topCenter,
-                                                    end: Alignment.bottomCenter,
-                                                    colors: [
-                                                      Colors.grey.shade800,
-                                                      Colors.grey.shade900,
-                                                    ],
-                                                  ),
+                                                decoration: const BoxDecoration(
+                                                  color: Color(0xFFF5F5F5),
                                                 ),
-                                                child: ClipRRect(
-                                                  borderRadius: const BorderRadius.vertical(
-                                                    top: Radius.circular(16),
-                                                  ),
-                                                  child: p['image'] != null
-                                                      ? Image.network(
-                                                          p['image'],
-                                                          width: double.infinity,
-                                                          fit: BoxFit.cover,
-                                                          loadingBuilder: (context, child, loadingProgress) {
-                                                            if (loadingProgress == null) return child;
-                                                            return Container(
-                                                              color: Colors.grey.shade800,
-                                                              child: Center(
-                                                                child: CircularProgressIndicator(
-                                                                  value: loadingProgress.expectedTotalBytes != null
-                                                                      ? loadingProgress.cumulativeBytesLoaded /
-                                                                          loadingProgress.expectedTotalBytes!
-                                                                      : null,
-                                                                  strokeWidth: 2,
-                                                                  valueColor: const AlwaysStoppedAnimation<Color>(
-                                                                    Colors.blueAccent,
-                                                                  ),
+                                                child: (p['image'] != null && 
+                                                        p['image'].toString().trim().isNotEmpty &&
+                                                        (p['image'].toString().startsWith('http://') || 
+                                                         p['image'].toString().startsWith('https://')))
+                                                    ? Image.network(
+                                                        p['image'].toString().trim(),
+                                                        width: double.infinity,
+                                                        height: double.infinity,
+                                                        fit: BoxFit.contain,
+                                                        loadingBuilder: (context, child, loadingProgress) {
+                                                          if (loadingProgress == null) return child;
+                                                          return Container(
+                                                            color: const Color(0xFFF5F5F5),
+                                                            child: const Center(
+                                                              child: CircularProgressIndicator(
+                                                                strokeWidth: 2,
+                                                                valueColor: AlwaysStoppedAnimation<Color>(
+                                                                  Color(0xFF000000),
                                                                 ),
                                                               ),
-                                                            );
-                                                          },
-                                                          errorBuilder: (_, __, ___) => Container(
-                                                            color: Colors.grey.shade800,
-                                                            child: const Icon(
-                                                              Icons.image_not_supported,
-                                                              size: 40,
-                                                              color: Colors.grey,
                                                             ),
-                                                          ),
-                                                        )
-                                                      : const Icon(
-                                                          Icons.shopping_bag,
-                                                          size: 40,
-                                                          color: Colors.grey,
-                                                        ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                top: 10,
-                                                right: 10,
-                                                child: Row(
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  children: [
-                                                    Container(
-                                                      margin: const EdgeInsets.only(right: 8),
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.blueAccent,
-                                                        shape: BoxShape.circle,
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: Colors.blueAccent.withValues(alpha: 0.5),
-                                                            blurRadius: 4,
-                                                            offset: const Offset(0, 2),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      child: IconButton(
-                                                        icon: const Icon(Icons.edit, color: Colors.white, size: 18),
-                                                        onPressed: () async {
-                                                          final result = await Navigator.of(context).pushNamed(
-                                                            '/vendeur-edit-product',
-                                                            arguments: p,
                                                           );
-                                                          if (result == true) {
-                                                            _loadProducts();
-                                                          }
                                                         },
-                                                        padding: const EdgeInsets.all(8),
-                                                        constraints: const BoxConstraints(),
-                                                        tooltip: 'Modifier le produit',
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.red.shade600,
-                                                        shape: BoxShape.circle,
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: Colors.red.withValues(alpha: 0.5),
-                                                            blurRadius: 4,
-                                                            offset: const Offset(0, 2),
+                                                        errorBuilder: (_, __, ___) => Container(
+                                                          color: const Color(0xFFF5F5F5),
+                                                          child: const Column(
+                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                            children: [
+                                                              Icon(
+                                                                Icons.image_not_supported,
+                                                                size: 48,
+                                                                color: Color(0xFF999999),
+                                                              ),
+                                                              SizedBox(height: 8),
+                                                              Text(
+                                                                'Image non disponible',
+                                                                style: TextStyle(
+                                                                  fontSize: 10,
+                                                                  color: Color(0xFF999999),
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
-                                                        ],
+                                                        ),
+                                                      )
+                                                    : Container(
+                                                        color: const Color(0xFFF5F5F5),
+                                                        child: const Column(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          children: [
+                                                            Icon(
+                                                              Icons.shopping_bag,
+                                                              size: 48,
+                                                              color: Color(0xFF999999),
+                                                            ),
+                                                            SizedBox(height: 8),
+                                                            Text(
+                                                              'Aucune image',
+                                                              style: TextStyle(
+                                                                fontSize: 10,
+                                                                color: Color(0xFF999999),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
-                                                      child: IconButton(
-                                                        icon: const Icon(Icons.delete, color: Colors.white, size: 18),
-                                                        onPressed: () => _showDeleteDialog(context, p),
-                                                        padding: const EdgeInsets.all(8),
-                                                        constraints: const BoxConstraints(),
-                                                        tooltip: 'Supprimer le produit',
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
                                               ),
                                               if (p['discountPercentage'] != null)
                                                 Positioned(
-                                                  top: 10,
-                                                  left: 10,
+                                                  top: 8,
+                                                  left: 8,
                                                   child: Container(
                                                     padding: const EdgeInsets.symmetric(
-                                                      horizontal: 8,
-                                                      vertical: 5,
+                                                      horizontal: 6,
+                                                      vertical: 3,
                                                     ),
-                                                    decoration: BoxDecoration(
-                                                      gradient: LinearGradient(
-                                                        colors: [
-                                                          Colors.red.shade600,
-                                                          Colors.red.shade700,
-                                                        ],
-                                                      ),
-                                                      borderRadius: BorderRadius.circular(20),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.red.withValues(alpha: 0.5),
-                                                          blurRadius: 4,
-                                                          offset: const Offset(0, 2),
-                                                        ),
-                                                      ],
+                                                    decoration: const BoxDecoration(
+                                                      color: Color(0xFF000000),
                                                     ),
                                                     child: Text(
                                                       '-${p['discountPercentage']}%',
                                                       style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 11,
+                                                        color: Color(0xFFFFFFFF),
+                                                        fontSize: 9,
                                                         fontWeight: FontWeight.bold,
+                                                        letterSpacing: 0.5,
                                                       ),
                                                     ),
                                                   ),
                                                 ),
                                               if (rating['rate'] != null)
                                                 Positioned(
-                                                  bottom: 10,
-                                                  left: 10,
+                                                  bottom: 8,
+                                                  left: 8,
                                                   child: Container(
                                                     padding: const EdgeInsets.symmetric(
-                                                      horizontal: 6,
-                                                      vertical: 4,
+                                                      horizontal: 5,
+                                                      vertical: 3,
                                                     ),
                                                     decoration: BoxDecoration(
-                                                      color: Colors.black.withValues(alpha: 0.6),
-                                                      borderRadius: BorderRadius.circular(12),
+                                                      color: const Color(0xFFFFFFFF),
+                                                      border: Border.all(
+                                                        color: const Color(0xFF000000),
+                                                        width: 1,
+                                                      ),
                                                     ),
                                                     child: Row(
                                                       mainAxisSize: MainAxisSize.min,
                                                       children: [
                                                         const Icon(
                                                           Icons.star,
-                                                          size: 12,
-                                                          color: Colors.amber,
+                                                          size: 10,
+                                                          color: Color(0xFF000000),
                                                         ),
                                                         const SizedBox(width: 2),
                                                         Text(
                                                           '${rating['rate']}',
                                                           style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 10,
+                                                            color: Color(0xFF000000),
+                                                            fontSize: 9,
                                                             fontWeight: FontWeight.bold,
                                                           ),
                                                         ),
@@ -575,126 +529,172 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                            padding: const EdgeInsets.all(10),
+                                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                                             child: Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisSize: MainAxisSize.min,
                                               children: [
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    if (p['brand'] != null)
-                                                      Container(
-                                                        padding: const EdgeInsets.symmetric(
-                                                          horizontal: 6,
-                                                          vertical: 2,
-                                                        ),
-                                                        decoration: BoxDecoration(
-                                                          color: Colors.blueAccent.withValues(alpha: 0.2),
-                                                          borderRadius: BorderRadius.circular(4),
-                                                        ),
-                                                        child: Text(
-                                                          p['brand']!.toUpperCase(),
-                                                          style: TextStyle(
-                                                            fontSize: 8,
-                                                            color: Colors.blue.shade300,
-                                                            fontWeight: FontWeight.bold,
-                                                            letterSpacing: 0.5,
-                                                          ),
-                                                        ),
+                                                if (p['brand'] != null)
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(bottom: 2),
+                                                    child: Container(
+                                                      padding: const EdgeInsets.symmetric(
+                                                          horizontal: 4, vertical: 1),
+                                                      decoration: const BoxDecoration(
+                                                        color: Color(0xFF000000),
                                                       ),
-                                                    if (p['brand'] != null) const SizedBox(height: 4),
-                                                    Text(
-                                                      p['title'] ?? '',
-                                                      maxLines: 2,
-                                                      overflow: TextOverflow.ellipsis,
-                                                      style: const TextStyle(
-                                                        fontSize: 12,
-                                                        fontWeight: FontWeight.bold,
-                                                        color: Colors.white,
-                                                        height: 1.2,
+                                                      child: Text(
+                                                        p['brand']!.toUpperCase(),
+                                                        style: const TextStyle(
+                                                          fontSize: 6,
+                                                          color: Color(0xFFFFFFFF),
+                                                          fontWeight: FontWeight.bold,
+                                                          letterSpacing: 0.8,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ],
+                                                  ),
+                                                Flexible(
+                                                  child: Text(
+                                                    p['title'] ?? '',
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: const TextStyle(
+                                                      fontSize: 11,
+                                                      fontWeight: FontWeight.w600,
+                                                      color: Color(0xFF000000),
+                                                      height: 1.1,
+                                                      letterSpacing: 0.1,
+                                                    ),
+                                                  ),
                                                 ),
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                const SizedBox(height: 3),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  crossAxisAlignment: CrossAxisAlignment.end,
                                                   children: [
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            if (p['discountPercentage'] != null)
-                                                              Text(
+                                                    Flexible(
+                                                      child: Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        children: [
+                                                          if (p['discountPercentage'] != null)
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(bottom: 0),
+                                                              child: Text(
                                                                 '${p['price']} \$',
-                                                                style: TextStyle(
-                                                                  fontSize: 9,
-                                                                  color: Colors.grey.shade500,
+                                                                style: const TextStyle(
+                                                                  fontSize: 8,
+                                                                  color: Color(0xFF999999),
                                                                   decoration: TextDecoration.lineThrough,
                                                                 ),
                                                               ),
+                                                            ),
+                                                          Text(
+                                                            '${finalPrice?.toStringAsFixed(2) ?? '-'} \$',
+                                                            style: const TextStyle(
+                                                              fontSize: 13,
+                                                              fontWeight: FontWeight.bold,
+                                                              color: Color(0xFF000000),
+                                                              letterSpacing: 0.2,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    if (p['stock'] != null)
+                                                      Container(
+                                                        padding: const EdgeInsets.symmetric(
+                                                            horizontal: 2, vertical: 1),
+                                                        decoration: BoxDecoration(
+                                                          color: const Color(0xFF000000).withValues(alpha: 0.1),
+                                                          border: Border.all(
+                                                            color: const Color(0xFF000000),
+                                                            width: 1,
+                                                          ),
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisSize: MainAxisSize.min,
+                                                          children: [
+                                                            const Icon(
+                                                              Icons.check_circle,
+                                                              size: 6,
+                                                              color: Color(0xFF000000),
+                                                            ),
+                                                            const SizedBox(width: 1),
                                                             Text(
-                                                              '${finalPrice?.toStringAsFixed(2) ?? '-'} \$',
-                                                              style: TextStyle(
-                                                                fontSize: 16,
+                                                              '${p['stock']}',
+                                                              style: const TextStyle(
+                                                                fontSize: 6,
                                                                 fontWeight: FontWeight.bold,
-                                                                color: Colors.green.shade400,
-                                                                shadows: [
-                                                                  Shadow(
-                                                                    color: Colors.green.withValues(alpha: 0.3),
-                                                                    blurRadius: 4,
-                                                                  ),
-                                                                ],
+                                                                color: Color(0xFF000000),
                                                               ),
                                                             ),
                                                           ],
                                                         ),
-                                                        if (p['stock'] != null)
-                                                          Container(
-                                                            padding: const EdgeInsets.symmetric(
-                                                              horizontal: 6,
-                                                              vertical: 3,
-                                                            ),
-                                                            decoration: BoxDecoration(
-                                                              color: (p['stock'] as int) > 0
-                                                                  ? Colors.green.withValues(alpha: 0.2)
-                                                                  : Colors.red.withValues(alpha: 0.2),
-                                                              borderRadius: BorderRadius.circular(8),
-                                                              border: Border.all(
-                                                                color: (p['stock'] as int) > 0
-                                                                    ? Colors.green
-                                                                    : Colors.red,
-                                                                width: 1,
-                                                              ),
-                                                            ),
-                                                            child: Row(
-                                                              mainAxisSize: MainAxisSize.min,
-                                                              children: [
-                                                                Icon(
-                                                                  Icons.check_circle,
-                                                                  size: 10,
-                                                                  color: (p['stock'] as int) > 0
-                                                                      ? Colors.green
-                                                                      : Colors.red,
-                                                                ),
-                                                                const SizedBox(width: 3),
-                                                                Text(
-                                                                  '${p['stock']}',
-                                                                  style: TextStyle(
-                                                                    fontSize: 9,
-                                                                    fontWeight: FontWeight.bold,
-                                                                    color: (p['stock'] as int) > 0
-                                                                        ? Colors.green
-                                                                        : Colors.red,
-                                                                  ),
-                                                                ),
-                                                              ],
+                                                      ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 6),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      width: 36,
+                                                      height: 36,
+                                                      decoration: BoxDecoration(
+                                                        color: const Color(0xFF000000),
+                                                        border: Border.all(
+                                                          color: const Color(0xFF000000),
+                                                          width: 1,
+                                                        ),
+                                                      ),
+                                                      child: Material(
+                                                        color: Colors.transparent,
+                                                        child: InkWell(
+                                                          onTap: () async {
+                                                            final result = await Navigator.of(context).pushNamed(
+                                                              '/vendeur-edit-product',
+                                                              arguments: p,
+                                                            );
+                                                            if (result == true) {
+                                                              _loadProducts();
+                                                            }
+                                                          },
+                                                          child: const Center(
+                                                            child: Icon(
+                                                              Icons.edit,
+                                                              size: 18,
+                                                              color: Color(0xFFFFFFFF),
                                                             ),
                                                           ),
-                                                      ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 8),
+                                                    Container(
+                                                      width: 36,
+                                                      height: 36,
+                                                      decoration: BoxDecoration(
+                                                        color: const Color(0xFFFFFFFF),
+                                                        border: Border.all(
+                                                          color: const Color(0xFF000000),
+                                                          width: 1,
+                                                        ),
+                                                      ),
+                                                      child: Material(
+                                                        color: Colors.transparent,
+                                                        child: InkWell(
+                                                          onTap: () => _showDeleteDialog(context, p),
+                                                          child: const Center(
+                                                            child: Icon(
+                                                              Icons.delete,
+                                                              size: 18,
+                                                              color: Color(0xFF000000),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),

@@ -13,6 +13,11 @@ import 'package:miniprojet/views/VendeurSettingsScreen.dart';
 import 'package:miniprojet/views/AdminDashboard.dart';
 import 'package:miniprojet/views/AdminProfileScreen.dart';
 import 'package:miniprojet/views/AdminSettingsScreen.dart';
+import 'package:miniprojet/views/ProfileScreen.dart';
+import 'package:miniprojet/views/SettingsScreen.dart';
+import 'package:miniprojet/views/CategoriesScreen.dart';
+import 'package:miniprojet/views/FavoritesScreen.dart';
+import 'package:miniprojet/views/SearchHistoryScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -203,6 +208,11 @@ class MyApp extends StatelessWidget {
         '/admin-settings': (context) => const AdminSettingsScreen(),
         '/client': (context) => const ClientDashboard(),
         '/cart': (context) => const ShoppingCartScreen(),
+        '/profile': (context) => const ProfileScreen(),
+        '/settings': (context) => const SettingsScreen(),
+        '/categories': (context) => const CategoriesScreen(),
+        '/favorites': (context) => const FavoritesScreen(),
+        '/search-history': (context) => const SearchHistoryScreen(),
         '/vendeur': (context) => const VendeurDashboard(),
         '/vendeur-add-product': (context) => const VendeurAddProductScreen(),
         '/vendeur-edit-product': (context) {

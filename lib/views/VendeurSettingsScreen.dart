@@ -18,13 +18,13 @@ class _VendeurSettingsScreenState extends State<VendeurSettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Paramètres'),
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFFFFFFFF),
+        foregroundColor: const Color(0xFF000000),
       ),
       body: Container(
-        color: Colors.black,
+        color: const Color(0xFFFFFFFF),
         child: ListView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(24),
           children: [
             // Section Compte
             _buildSectionTitle('Compte'),
@@ -39,7 +39,7 @@ class _VendeurSettingsScreenState extends State<VendeurSettingsScreen> {
                     Navigator.of(context).pushNamed('/vendeur-profile');
                   },
                 ),
-                const Divider(color: Colors.grey),
+                const Divider(color: Color(0xFFE5E5E5)),
                 _buildSettingsTile(
                   icon: Icons.lock,
                   title: 'Changer le mot de passe',
@@ -49,6 +49,7 @@ class _VendeurSettingsScreenState extends State<VendeurSettingsScreen> {
                       const SnackBar(
                         content: Text('Fonctionnalité à venir'),
                         duration: Duration(seconds: 2),
+                        backgroundColor: Color(0xFF000000),
                       ),
                     );
                   },
@@ -62,36 +63,36 @@ class _VendeurSettingsScreenState extends State<VendeurSettingsScreen> {
             _buildSettingsCard(
               children: [
                 SwitchListTile(
-                  secondary: const Icon(Icons.notifications, color: Colors.blueAccent),
-                  title: const Text('Notifications', style: TextStyle(color: Colors.white)),
-                  subtitle: const Text('Recevoir des notifications', style: TextStyle(color: Colors.grey)),
+                  secondary: const Icon(Icons.notifications, color: Color(0xFF000000)),
+                  title: const Text('Notifications', style: TextStyle(color: Color(0xFF000000))),
+                  subtitle: const Text('Recevoir des notifications', style: TextStyle(color: Color(0xFF666666))),
                   value: _notificationsEnabled,
                   onChanged: (value) {
                     setState(() {
                       _notificationsEnabled = value;
                     });
                   },
-                  activeColor: Colors.blueAccent,
+                  activeColor: const Color(0xFF000000),
                 ),
-                const Divider(color: Colors.grey),
+                const Divider(color: Color(0xFFE5E5E5)),
                 SwitchListTile(
-                  secondary: const Icon(Icons.dark_mode, color: Colors.blueAccent),
-                  title: const Text('Mode sombre', style: TextStyle(color: Colors.white)),
-                  subtitle: const Text('Activer le thème sombre', style: TextStyle(color: Colors.grey)),
+                  secondary: const Icon(Icons.dark_mode, color: Color(0xFF000000)),
+                  title: const Text('Mode sombre', style: TextStyle(color: Color(0xFF000000))),
+                  subtitle: const Text('Activer le thème sombre', style: TextStyle(color: Color(0xFF666666))),
                   value: _darkModeEnabled,
                   onChanged: (value) {
                     setState(() {
                       _darkModeEnabled = value;
                     });
                   },
-                  activeColor: Colors.blueAccent,
+                  activeColor: const Color(0xFF000000),
                 ),
-                const Divider(color: Colors.grey),
+                const Divider(color: Color(0xFFE5E5E5)),
                 ListTile(
-                  leading: const Icon(Icons.language, color: Colors.blueAccent),
-                  title: const Text('Langue', style: TextStyle(color: Colors.white)),
-                  subtitle: Text(_selectedLanguage, style: const TextStyle(color: Colors.grey)),
-                  trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+                  leading: const Icon(Icons.language, color: Color(0xFF000000)),
+                  title: const Text('Langue', style: TextStyle(color: Color(0xFF000000))),
+                  subtitle: Text(_selectedLanguage, style: const TextStyle(color: Color(0xFF666666))),
+                  trailing: const Icon(Icons.chevron_right, color: Color(0xFF000000)),
                   onTap: () {
                     _showLanguageDialog(context);
                   },
@@ -112,7 +113,7 @@ class _VendeurSettingsScreenState extends State<VendeurSettingsScreen> {
                     _showAboutDialog(context);
                   },
                 ),
-                const Divider(color: Colors.grey),
+                const Divider(color: Color(0xFFE5E5E5)),
                 _buildSettingsTile(
                   icon: Icons.help_outline,
                   title: 'Aide et support',
@@ -122,6 +123,7 @@ class _VendeurSettingsScreenState extends State<VendeurSettingsScreen> {
                       const SnackBar(
                         content: Text('Fonctionnalité à venir'),
                         duration: Duration(seconds: 2),
+                        backgroundColor: Color(0xFF000000),
                       ),
                     );
                   },
@@ -136,13 +138,13 @@ class _VendeurSettingsScreenState extends State<VendeurSettingsScreen> {
                 Navigator.of(context).pushReplacementNamed('/login');
               },
               icon: const Icon(Icons.logout),
-              label: const Text('Déconnexion'),
+              label: const Text('DÉCONNEXION'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red.shade600,
-                foregroundColor: Colors.white,
+                backgroundColor: const Color(0xFF000000),
+                foregroundColor: const Color(0xFFFFFFFF),
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(0),
                 ),
               ),
             ),
@@ -154,20 +156,23 @@ class _VendeurSettingsScreenState extends State<VendeurSettingsScreen> {
 
   Widget _buildSectionTitle(String title) {
     return Text(
-      title,
-      style: TextStyle(
-        color: Colors.grey.shade300,
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
+      title.toUpperCase(),
+      style: const TextStyle(
+        color: Color(0xFF666666),
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 1.2,
       ),
     );
   }
 
   Widget _buildSettingsCard({required List<Widget> children}) {
     return Card(
-      color: Colors.grey.shade900,
+      color: const Color(0xFFFFFFFF),
+      elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(0),
+        side: const BorderSide(color: Color(0xFFE5E5E5), width: 1),
       ),
       child: Column(children: children),
     );
@@ -181,13 +186,13 @@ class _VendeurSettingsScreenState extends State<VendeurSettingsScreen> {
     Color? textColor,
   }) {
     return ListTile(
-      leading: Icon(icon, color: textColor ?? Colors.blueAccent),
+      leading: Icon(icon, color: textColor ?? const Color(0xFF000000)),
       title: Text(
         title,
-        style: TextStyle(color: textColor ?? Colors.white),
+        style: TextStyle(color: textColor ?? const Color(0xFF000000)),
       ),
-      subtitle: Text(subtitle, style: const TextStyle(color: Colors.grey)),
-      trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+      subtitle: Text(subtitle, style: const TextStyle(color: Color(0xFF666666))),
+      trailing: const Icon(Icons.chevron_right, color: Color(0xFF000000)),
       onTap: onTap,
     );
   }
@@ -196,13 +201,13 @@ class _VendeurSettingsScreenState extends State<VendeurSettingsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey.shade900,
-        title: const Text('Choisir la langue', style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFFFFFFFF),
+        title: const Text('Choisir la langue', style: TextStyle(color: Color(0xFF000000))),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             RadioListTile<String>(
-              title: const Text('Français', style: TextStyle(color: Colors.white)),
+              title: const Text('Français', style: TextStyle(color: Color(0xFF000000))),
               value: 'Français',
               groupValue: _selectedLanguage,
               onChanged: (value) {
@@ -211,10 +216,10 @@ class _VendeurSettingsScreenState extends State<VendeurSettingsScreen> {
                 });
                 Navigator.pop(context);
               },
-              activeColor: Colors.blueAccent,
+              activeColor: const Color(0xFF000000),
             ),
             RadioListTile<String>(
-              title: const Text('English', style: TextStyle(color: Colors.white)),
+              title: const Text('English', style: TextStyle(color: Color(0xFF000000))),
               value: 'English',
               groupValue: _selectedLanguage,
               onChanged: (value) {
@@ -223,7 +228,7 @@ class _VendeurSettingsScreenState extends State<VendeurSettingsScreen> {
                 });
                 Navigator.pop(context);
               },
-              activeColor: Colors.blueAccent,
+              activeColor: const Color(0xFF000000),
             ),
           ],
         ),
@@ -235,23 +240,23 @@ class _VendeurSettingsScreenState extends State<VendeurSettingsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey.shade900,
-        title: const Text('À propos', style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFFFFFFFF),
+        title: const Text('À propos', style: TextStyle(color: Color(0xFF000000))),
         content: const Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Mini Projet E-commerce', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+            Text('Mini Projet E-commerce', style: TextStyle(color: Color(0xFF000000), fontSize: 18, fontWeight: FontWeight.bold)),
             SizedBox(height: 8),
-            Text('Version 1.0.0', style: TextStyle(color: Colors.grey)),
+            Text('Version 1.0.0', style: TextStyle(color: Color(0xFF666666))),
             SizedBox(height: 16),
-            Text('Application de commerce électronique développée avec Flutter et MongoDB.', style: TextStyle(color: Colors.grey)),
+            Text('Application de commerce électronique développée avec Flutter et MongoDB.', style: TextStyle(color: Color(0xFF666666))),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Fermer', style: TextStyle(color: Colors.blueAccent)),
+            child: const Text('Fermer', style: TextStyle(color: Color(0xFF000000))),
           ),
         ],
       ),

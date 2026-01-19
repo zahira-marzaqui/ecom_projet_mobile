@@ -127,15 +127,15 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Catégories'),
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFFFFFFFF),
+        foregroundColor: const Color(0xFF000000),
       ),
       body: Container(
-        color: Colors.black,
+        color: const Color(0xFFFFFFFF),
         child: _isLoading
             ? const Center(
                 child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blueAccent),
+                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF000000)),
                 ),
               )
             : _categories.isEmpty
@@ -146,14 +146,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         Icon(
                           Icons.category_outlined,
                           size: 100,
-                          color: Colors.grey.shade600,
+                          color: const Color(0xFF999999),
                         ),
-                        const SizedBox(height: 20),
-                        Text(
+                        const SizedBox(height: 32),
+                        const Text(
                           'Aucune catégorie disponible',
                           style: TextStyle(
                             fontSize: 18,
-                            color: Colors.grey.shade400,
+                            color: Color(0xFF000000),
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.5,
                           ),
                         ),
                       ],
@@ -161,14 +163,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   )
                 : RefreshIndicator(
                     onRefresh: _loadCategories,
-                    color: Colors.blueAccent,
+                    color: const Color(0xFF000000),
                     child: GridView.builder(
-                      padding: const EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(24),
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 16,
-                        childAspectRatio: 0.85,
+                        crossAxisSpacing: 24,
+                        mainAxisSpacing: 24,
+                        childAspectRatio: 0.75,
                       ),
                       itemCount: _categories.length,
                       itemBuilder: (context, index) {
@@ -199,141 +201,104 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     required List<Color> colors,
     required IconData icon,
   }) {
-    return GestureDetector(
-      onTap: () {
-        // Naviguer vers ClientDashboard avec la catégorie sélectionnée
-        Navigator.of(context).pushReplacementNamed(
-          '/client',
-          arguments: category,
-        );
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: colors,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: colors[0].withValues(alpha: 0.3),
-              blurRadius: 15,
-              offset: const Offset(0, 8),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          // Naviguer vers ClientDashboard avec la catégorie sélectionnée
+          Navigator.of(context).pushReplacementNamed(
+            '/client',
+            arguments: category,
+          );
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFFFFFFFF),
+            border: Border.all(
+              color: const Color(0xFF000000),
+              width: 1.5,
             ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Stack(
-            children: [
-              // Pattern décoratif en arrière-plan
-              Positioned(
-                top: -20,
-                right: -20,
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white.withValues(alpha: 0.1),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: -30,
-                left: -30,
-                child: Container(
-                  width: 120,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white.withValues(alpha: 0.1),
-                  ),
-                ),
-              ),
-              // Contenu de la carte
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Icône de la catégorie
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Icon(
-                        icon,
-                        size: 32,
-                        color: Colors.white,
-                      ),
-                    ),
-                    // Nom et nombre de produits
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          formattedName,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            shadows: [
-                              Shadow(
-                                color: Colors.black26,
-                                blurRadius: 4,
-                              ),
-                            ],
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: 8),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.25),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Text(
-                            '$count ${count > 1 ? 'produits' : 'produit'}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              // Effet de brillance
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  height: 2,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.white.withValues(alpha: 0.5),
-                        Colors.transparent,
-                      ],
-                    ),
-                  ),
-                ),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFF000000).withValues(alpha: 0.08),
+                blurRadius: 6,
+                offset: const Offset(0, 3),
               ),
             ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Icône de la catégorie avec style élégant
+                Container(
+                  width: 64,
+                  height: 64,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF000000),
+                  ),
+                  child: Icon(
+                    icon,
+                    size: 32,
+                    color: const Color(0xFFFFFFFF),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // Nom de la catégorie
+                Flexible(
+                  child: Text(
+                    formattedName.toUpperCase(),
+                    style: const TextStyle(
+                      color: Color(0xFF000000),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1.5,
+                      height: 1.3,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const Spacer(),
+                const SizedBox(height: 16),
+                // Badge avec nombre de produits
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF000000),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        '$count',
+                        style: const TextStyle(
+                          color: Color(0xFFFFFFFF),
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        count > 1 ? 'PRODUITS' : 'PRODUIT',
+                        style: const TextStyle(
+                          color: Color(0xFFFFFFFF),
+                          fontSize: 8,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
