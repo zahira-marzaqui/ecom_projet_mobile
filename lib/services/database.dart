@@ -497,25 +497,44 @@ class MongoDatabase {
 
   static Future<Map<String, int>> getAdminStatistics() async {
     try {
-      final usersSnapshot = await db.collection(userCollectionName).count().get();
-      final productsSnapshot = await db.collection(productCollectionName).count().get();
-      final categoriesSnapshot = await db.collection(categoryCollectionName).count().get();
+      // Récupérer tous les utilisateurs
+      final allUsers = await getAllUsers();
+      final totalUsers = allUsers.length;
+      final totalClients = allUsers.where((u) => u['role'] == 'client').length;
+      final totalVendeurs = allUsers.where((u) => u['role'] == 'vendeur').length;
       
-      final clientsSnapshot = await db.collection(userCollectionName)
-          .where('role', isEqualTo: 'client')
-          .count()
-          .get();
-      final vendeursSnapshot = await db.collection(userCollectionName)
-          .where('role', isEqualTo: 'vendeur')
-          .count()
-          .get();
+      // Récupérer tous les produits
+      final allProducts = await getAllProducts();
+      final totalProducts = allProducts.length;
+      
+      // Récupérer les catégories (depuis la collection ou extraire depuis les produits)
+      var categories = await getAllCategories();
+      if (categories.isEmpty) {
+        // Extraire les catégories depuis les produits
+        final categoriesSet = <String>{};
+        for (var product in allProducts) {
+          final category = product['category']?.toString();
+          if (category != null && category.isNotEmpty) {
+            categoriesSet.add(category);
+          }
+        }
+        categories = categoriesSet.map((name) => {'name': name}).toList();
+      }
+      final totalCategories = categories.length;
+
+      print("📊 Statistiques calculées:");
+      print("   - Utilisateurs: $totalUsers");
+      print("   - Produits: $totalProducts");
+      print("   - Catégories: $totalCategories");
+      print("   - Clients: $totalClients");
+      print("   - Vendeurs: $totalVendeurs");
 
       return {
-        'totalUsers': usersSnapshot.count ?? 0,
-        'totalProducts': productsSnapshot.count ?? 0,
-        'totalCategories': categoriesSnapshot.count ?? 0,
-        'totalClients': clientsSnapshot.count ?? 0,
-        'totalVendeurs': vendeursSnapshot.count ?? 0,
+        'totalUsers': totalUsers,
+        'totalProducts': totalProducts,
+        'totalCategories': totalCategories,
+        'totalClients': totalClients,
+        'totalVendeurs': totalVendeurs,
       };
     } catch (e) {
       print("✗ Error getting statistics: $e");

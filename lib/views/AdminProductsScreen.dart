@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:miniprojet/services/database.dart';
+import 'package:miniprojet/widgets/network_image_widget.dart';
 
 class AdminProductsScreen extends StatefulWidget {
   const AdminProductsScreen({super.key});
@@ -118,23 +119,28 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
-          backgroundColor: Colors.grey.shade900,
-          title: const Text('Ajouter un produit', style: TextStyle(color: Colors.white)),
+          backgroundColor: const Color(0xFFFFFFFF),
+          title: const Text('Ajouter un produit', style: TextStyle(color: Color(0xFF000000))),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
                   controller: titleController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
                   decoration: const InputDecoration(
                     labelText: 'Titre *',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
@@ -144,36 +150,46 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                     Expanded(
                       child: TextField(
                         controller: priceController,
-                        style: const TextStyle(color: Colors.white),
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Prix *',
-                          labelStyle: TextStyle(color: Colors.grey),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blueAccent),
-                          ),
-                        ),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: 'Prix *',
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFF000000)),
+                    ),
+                  ),
                       ),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
                       child: TextField(
                         controller: stockController,
-                        style: const TextStyle(color: Colors.white),
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Stock *',
-                          labelStyle: TextStyle(color: Colors.grey),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blueAccent),
-                          ),
-                        ),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: 'Stock *',
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFF000000)),
+                    ),
+                  ),
                       ),
                     ),
                   ],
@@ -181,77 +197,102 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                 const SizedBox(height: 16),
                 TextField(
                   controller: descriptionController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
                   maxLines: 3,
                   decoration: const InputDecoration(
                     labelText: 'Description',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: categoryController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
                   decoration: const InputDecoration(
                     labelText: 'Catégorie *',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: brandController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
                   decoration: const InputDecoration(
                     labelText: 'Marque',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: discountController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     labelText: 'Remise (%)',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: imageController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
                   decoration: const InputDecoration(
                     labelText: 'URL de l\'image',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
@@ -259,23 +300,30 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                 if (_vendeurs.isNotEmpty)
                   DropdownButtonFormField<String>(
                     value: selectedVendeurId,
-                    dropdownColor: Colors.grey.shade800,
-                    style: const TextStyle(color: Colors.white),
+                    dropdownColor: const Color(0xFFFFFFFF),
+                    style: const TextStyle(color: Color(0xFF000000)),
                     decoration: const InputDecoration(
                       labelText: 'Vendeur',
-                      labelStyle: TextStyle(color: Colors.grey),
+                      labelStyle: TextStyle(color: Color(0xFF999999)),
+                      floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
                       enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
+                        borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blueAccent),
+                        borderSide: BorderSide(color: Color(0xFF000000)),
                       ),
                     ),
                     items: [
-                      const DropdownMenuItem(value: null, child: Text('Aucun')),
+                      const DropdownMenuItem(
+                        value: null,
+                        child: Text('Aucun', style: TextStyle(color: Color(0xFF000000))),
+                      ),
                       ..._vendeurs.map((v) => DropdownMenuItem(
                             value: v['_id'],
-                            child: Text(v['email'] ?? 'N/A'),
+                            child: Text(
+                              v['email'] ?? 'N/A',
+                              style: const TextStyle(color: Color(0xFF000000)),
+                            ),
                           )),
                     ],
                     onChanged: (value) {
@@ -290,7 +338,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Annuler', style: TextStyle(color: Colors.grey)),
+              child: const Text('Annuler', style: TextStyle(color: Color(0xFF666666))),
             ),
             TextButton(
               onPressed: () async {
@@ -301,7 +349,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Veuillez remplir tous les champs obligatoires'),
-                      backgroundColor: Colors.red,
+                      backgroundColor: Color(0xFF000000),
                     ),
                   );
                   return;
@@ -345,7 +393,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Produit créé avec succès'),
-                      backgroundColor: Colors.green,
+                      backgroundColor: Color(0xFF000000),
                     ),
                   );
                 } else {
@@ -353,12 +401,12 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Erreur lors de la création'),
-                      backgroundColor: Colors.red,
+                      backgroundColor: Color(0xFF000000),
                     ),
                   );
                 }
               },
-              child: const Text('Créer', style: TextStyle(color: Colors.blueAccent)),
+              child: const Text('Créer', style: TextStyle(color: Color(0xFF000000))),
             ),
           ],
         ),
@@ -382,23 +430,28 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
-          backgroundColor: Colors.grey.shade900,
-          title: const Text('Modifier le produit', style: TextStyle(color: Colors.white)),
+          backgroundColor: const Color(0xFFFFFFFF),
+          title: const Text('Modifier le produit', style: TextStyle(color: Color(0xFF000000))),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
                   controller: titleController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
                   decoration: const InputDecoration(
                     labelText: 'Titre *',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
@@ -408,36 +461,46 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                     Expanded(
                       child: TextField(
                         controller: priceController,
-                        style: const TextStyle(color: Colors.white),
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Prix *',
-                          labelStyle: TextStyle(color: Colors.grey),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blueAccent),
-                          ),
-                        ),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: 'Prix *',
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFF000000)),
+                    ),
+                  ),
                       ),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
                       child: TextField(
                         controller: stockController,
-                        style: const TextStyle(color: Colors.white),
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Stock *',
-                          labelStyle: TextStyle(color: Colors.grey),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blueAccent),
-                          ),
-                        ),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: 'Stock *',
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFF000000)),
+                    ),
+                  ),
                       ),
                     ),
                   ],
@@ -445,77 +508,102 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                 const SizedBox(height: 16),
                 TextField(
                   controller: descriptionController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
                   maxLines: 3,
                   decoration: const InputDecoration(
                     labelText: 'Description',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: categoryController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
                   decoration: const InputDecoration(
                     labelText: 'Catégorie *',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: brandController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
                   decoration: const InputDecoration(
                     labelText: 'Marque',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: discountController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     labelText: 'Remise (%)',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: imageController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 15,
+                    letterSpacing: 0.3,
+                  ),
                   decoration: const InputDecoration(
                     labelText: 'URL de l\'image',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
+                    floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
@@ -523,23 +611,30 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                 if (_vendeurs.isNotEmpty)
                   DropdownButtonFormField<String>(
                     value: selectedVendeurId,
-                    dropdownColor: Colors.grey.shade800,
-                    style: const TextStyle(color: Colors.white),
+                    dropdownColor: const Color(0xFFFFFFFF),
+                    style: const TextStyle(color: Color(0xFF000000)),
                     decoration: const InputDecoration(
                       labelText: 'Vendeur',
-                      labelStyle: TextStyle(color: Colors.grey),
+                      labelStyle: TextStyle(color: Color(0xFF999999)),
+                      floatingLabelStyle: TextStyle(color: Color(0xFF000000)),
                       enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
+                        borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blueAccent),
+                        borderSide: BorderSide(color: Color(0xFF000000)),
                       ),
                     ),
                     items: [
-                      const DropdownMenuItem(value: null, child: Text('Aucun')),
+                      const DropdownMenuItem(
+                        value: null,
+                        child: Text('Aucun', style: TextStyle(color: Color(0xFF000000))),
+                      ),
                       ..._vendeurs.map((v) => DropdownMenuItem(
                             value: v['_id'],
-                            child: Text(v['email'] ?? 'N/A'),
+                            child: Text(
+                              v['email'] ?? 'N/A',
+                              style: const TextStyle(color: Color(0xFF000000)),
+                            ),
                           )),
                     ],
                     onChanged: (value) {
@@ -554,7 +649,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Annuler', style: TextStyle(color: Colors.grey)),
+              child: const Text('Annuler', style: TextStyle(color: Color(0xFF666666))),
             ),
             TextButton(
               onPressed: () async {
@@ -565,7 +660,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Veuillez remplir tous les champs obligatoires'),
-                      backgroundColor: Colors.red,
+                      backgroundColor: Color(0xFF000000),
                     ),
                   );
                   return;
@@ -605,7 +700,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Produit modifié avec succès'),
-                      backgroundColor: Colors.green,
+                      backgroundColor: Color(0xFF000000),
                     ),
                   );
                 } else {
@@ -613,12 +708,12 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Erreur lors de la modification'),
-                      backgroundColor: Colors.red,
+                      backgroundColor: Color(0xFF000000),
                     ),
                   );
                 }
               },
-              child: const Text('Enregistrer', style: TextStyle(color: Colors.blueAccent)),
+              child: const Text('Enregistrer', style: TextStyle(color: Color(0xFF000000))),
             ),
           ],
         ),
@@ -630,16 +725,16 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey.shade900,
-        title: const Text('Supprimer le produit', style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFFFFFFFF),
+        title: const Text('Supprimer le produit', style: TextStyle(color: Color(0xFF000000))),
         content: Text(
           'Êtes-vous sûr de vouloir supprimer "${product['title']}" ?\nCette action est irréversible.',
-          style: const TextStyle(color: Colors.grey),
+          style: const TextStyle(color: Color(0xFF666666)),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Annuler', style: TextStyle(color: Colors.grey)),
+            child: const Text('Annuler', style: TextStyle(color: Color(0xFF666666))),
           ),
           TextButton(
             onPressed: () async {
@@ -653,7 +748,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Produit supprimé avec succès'),
-                    backgroundColor: Colors.green,
+                    backgroundColor: Color(0xFF000000),
                   ),
                 );
               } else {
@@ -661,12 +756,12 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Erreur lors de la suppression'),
-                    backgroundColor: Colors.red,
+                    backgroundColor: Color(0xFF000000),
                   ),
                 );
               }
             },
-            child: const Text('Supprimer', style: TextStyle(color: Colors.red)),
+            child: const Text('Supprimer', style: TextStyle(color: Color(0xFF000000))),
           ),
         ],
       ),
@@ -678,22 +773,24 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
     return Stack(
       children: [
         Container(
-          color: Colors.black,
+          color: const Color(0xFFFFFFFF),
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
-                color: Colors.black,
+                padding: const EdgeInsets.all(24),
+                color: const Color(0xFFFFFFFF),
                 child: Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${_products.length} produit(s) | ${_categories.length} catégorie(s)',
-                          style: TextStyle(
-                            color: Colors.grey.shade400,
+                          '${_products.length} PRODUIT(S) | ${_categories.length} CATÉGORIE(S)',
+                          style: const TextStyle(
+                            color: Color(0xFF000000),
                             fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1.2,
                           ),
                         ),
                         if (_products.isEmpty)
@@ -708,24 +805,28 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                               await MongoDatabase.syncProductsFromFakeStore();
                               _loadData();
                             },
-                            icon: const Icon(Icons.sync, size: 16),
-                            label: const Text('Synchroniser', style: TextStyle(fontSize: 12)),
+                            icon: const Icon(Icons.sync, size: 16, color: Color(0xFF000000)),
+                            label: const Text('Synchroniser', style: TextStyle(fontSize: 12, color: Color(0xFF000000))),
                             style: TextButton.styleFrom(
-                              foregroundColor: Colors.blueAccent,
+                              foregroundColor: const Color(0xFF000000),
                             ),
                           ),
                       ],
                     ),
                     const SizedBox(height: 8),
                     TextField(
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(
+                        color: Color(0xFF000000),
+                        fontSize: 15,
+                        letterSpacing: 0.3,
+                      ),
                       decoration: InputDecoration(
                         hintText: 'Rechercher un produit...',
-                        hintStyle: TextStyle(color: Colors.grey.shade500),
-                        prefixIcon: const Icon(Icons.search, color: Colors.blueAccent),
+                        hintStyle: const TextStyle(color: Color(0xFF999999)),
+                        prefixIcon: const Icon(Icons.search, color: Color(0xFF666666), size: 20),
                         suffixIcon: _searchQuery.isNotEmpty
                             ? IconButton(
-                                icon: const Icon(Icons.clear, color: Colors.grey),
+                                icon: const Icon(Icons.clear, color: Color(0xFF000000)),
                                 onPressed: () {
                                   setState(() {
                                     _searchQuery = '';
@@ -734,10 +835,19 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                               )
                             : null,
                         filled: true,
-                        fillColor: Colors.grey.shade900,
+                        fillColor: const Color(0xFFFFFFFF),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(0),
+                          borderSide: const BorderSide(color: Color(0xFFE5E5E5), width: 1),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(0),
+                          borderSide: const BorderSide(color: Color(0xFFE5E5E5), width: 1),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(0),
+                          borderSide: const BorderSide(color: Color(0xFF000000), width: 1.5),
                         ),
                       ),
                       onChanged: (value) {
@@ -749,16 +859,24 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                     const SizedBox(height: 12),
                     if (_categories.isNotEmpty)
                       SizedBox(
-                        height: 40,
+                        height: 44,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
+                          padding: const EdgeInsets.symmetric(vertical: 2),
                           children: [
                             FilterChip(
-                              label: const Text('Toutes', style: TextStyle(color: Colors.white)),
+                              label: const Text('Toutes', style: TextStyle(color: Color(0xFF000000), fontSize: 12)),
                               selected: _filterCategory == 'all',
-                              selectedColor: Colors.blueAccent,
-                              checkmarkColor: Colors.white,
-                              backgroundColor: Colors.grey.shade800,
+                              selectedColor: const Color(0xFF000000),
+                              checkmarkColor: const Color(0xFFFFFFFF),
+                              backgroundColor: const Color(0xFFFFFFFF),
+                              side: BorderSide(
+                                color: _filterCategory == 'all' 
+                                    ? const Color(0xFF000000) 
+                                    : const Color(0xFFE5E5E5),
+                                width: 1,
+                              ),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               onSelected: (_) {
                                 setState(() {
                                   _filterCategory = 'all';
@@ -769,11 +887,22 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                             ..._categories.map((category) => Padding(
                                   padding: const EdgeInsets.only(right: 8),
                                   child: FilterChip(
-                                    label: Text(category, style: const TextStyle(color: Colors.white)),
+                                    label: Text(
+                                      category,
+                                      style: const TextStyle(color: Color(0xFF000000), fontSize: 12),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                     selected: _filterCategory == category,
-                                    selectedColor: Colors.blueAccent,
-                                    checkmarkColor: Colors.white,
-                                    backgroundColor: Colors.grey.shade800,
+                                    selectedColor: const Color(0xFF000000),
+                                    checkmarkColor: const Color(0xFFFFFFFF),
+                                    backgroundColor: const Color(0xFFFFFFFF),
+                                    side: BorderSide(
+                                      color: _filterCategory == category 
+                                          ? const Color(0xFF000000) 
+                                          : const Color(0xFFE5E5E5),
+                                      width: 1,
+                                    ),
+                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                                     onSelected: (_) {
                                       setState(() {
                                         _filterCategory = category;
@@ -789,31 +918,35 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
               ),
               Expanded(
                 child: _isLoading
-                    ? const Center(child: CircularProgressIndicator())
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF000000)),
+                        ),
+                      )
                     : _filteredProducts.isEmpty
                         ? Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.inventory_2_outlined, size: 64, color: Colors.grey.shade600),
+                                const Icon(Icons.inventory_2_outlined, size: 64, color: Color(0xFF999999)),
                                 const SizedBox(height: 16),
                                 Text(
                                   _products.isEmpty 
                                       ? 'Aucun produit dans Firebase'
                                       : 'Aucun produit correspondant aux filtres',
-                                  style: TextStyle(color: Colors.grey.shade400),
+                                  style: const TextStyle(color: Color(0xFF000000)),
                                 ),
                                 if (_products.isEmpty) ...[
                                   const SizedBox(height: 8),
                                   Text(
                                     'Total: ${_products.length} produit(s)',
-                                    style: TextStyle(color: Colors.grey.shade500, fontSize: 12),
+                                    style: const TextStyle(color: Color(0xFF666666), fontSize: 12),
                                   ),
                                 ] else ...[
                                   const SizedBox(height: 8),
                                   Text(
                                     '${_filteredProducts.length} sur ${_products.length} produit(s)',
-                                    style: TextStyle(color: Colors.grey.shade500, fontSize: 12),
+                                    style: const TextStyle(color: Color(0xFF666666), fontSize: 12),
                                   ),
                                 ],
                               ],
@@ -821,14 +954,14 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                           )
                         : RefreshIndicator(
                             onRefresh: _loadData,
-                            color: Colors.blueAccent,
+                            color: const Color(0xFF000000),
                             child: GridView.builder(
-                              padding: const EdgeInsets.all(8),
+                              padding: const EdgeInsets.all(24),
                               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                childAspectRatio: 0.6,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10,
+                                childAspectRatio: 0.42,
+                                crossAxisSpacing: 24,
+                                mainAxisSpacing: 24,
                               ),
                               itemCount: _filteredProducts.length,
                               itemBuilder: (context, index) {
@@ -839,104 +972,295 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
                                         (1 - (product['discountPercentage'] as num) / 100))
                                     : product['price'];
 
-                                return Card(
-                                  color: Colors.grey.shade900,
+                                final rating = (product['rating'] as Map<String, dynamic>?) ?? {};
+                                
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFFFFFFF),
+                                    border: Border.all(
+                                      color: const Color(0xFF000000),
+                                      width: 1.5,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: const Color(0xFF000000).withValues(alpha: 0.08),
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 4),
+                                      ),
+                                    ],
+                                  ),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Expanded(
-                                        flex: 3,
+                                        flex: 4,
                                         child: Stack(
                                           children: [
                                             Container(
                                               width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                borderRadius: const BorderRadius.vertical(
-                                                  top: Radius.circular(12),
-                                                ),
-                                                color: Colors.grey.shade800,
+                                              decoration: const BoxDecoration(
+                                                color: Color(0xFFF5F5F5),
                                               ),
-                                              child: product['image'] != null
-                                                  ? ClipRRect(
-                                                      borderRadius: const BorderRadius.vertical(
-                                                        top: Radius.circular(12),
-                                                      ),
-                                                      child: Image.network(
-                                                        product['image'],
-                                                        fit: BoxFit.cover,
-                                                        errorBuilder: (_, __, ___) => const Icon(
-                                                          Icons.image_not_supported,
-                                                          size: 40,
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ),
+                                              child: (product['image'] != null && 
+                                                      product['image'].toString().trim().isNotEmpty &&
+                                                      (product['image'].toString().startsWith('http://') || 
+                                                       product['image'].toString().startsWith('https://')))
+                                                  ? NetworkImageWidget(
+                                                      imageUrl: product['image'].toString().trim(),
+                                                      width: double.infinity,
+                                                      height: double.infinity,
+                                                      fit: BoxFit.contain,
                                                     )
-                                                  : const Icon(
-                                                      Icons.shopping_bag,
-                                                      size: 40,
-                                                      color: Colors.grey,
+                                                  : Container(
+                                                      color: const Color(0xFFF5F5F5),
+                                                      child: const Column(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons.shopping_bag,
+                                                            size: 48,
+                                                            color: Color(0xFF999999),
+                                                          ),
+                                                          SizedBox(height: 8),
+                                                          Text(
+                                                            'Aucune image',
+                                                            style: TextStyle(
+                                                              fontSize: 10,
+                                                              color: Color(0xFF999999),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                             ),
-                                            Positioned(
-                                              top: 8,
-                                              right: 8,
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  IconButton(
-                                                    icon: const Icon(Icons.edit,
-                                                        color: Colors.blueAccent, size: 18),
-                                                    onPressed: () => _showEditProductDialog(product),
-                                                    padding: EdgeInsets.zero,
-                                                    constraints: const BoxConstraints(),
+                                            if (product['discountPercentage'] != null)
+                                              Positioned(
+                                                top: 8,
+                                                left: 8,
+                                                child: Container(
+                                                  padding: const EdgeInsets.symmetric(
+                                                    horizontal: 6,
+                                                    vertical: 3,
                                                   ),
-                                                  IconButton(
-                                                    icon: const Icon(Icons.delete,
-                                                        color: Colors.red, size: 18),
-                                                    onPressed: () => _showDeleteProductDialog(product),
-                                                    padding: EdgeInsets.zero,
-                                                    constraints: const BoxConstraints(),
+                                                  decoration: const BoxDecoration(
+                                                    color: Color(0xFF000000),
                                                   ),
-                                                ],
+                                                  child: Text(
+                                                    '-${product['discountPercentage']}%',
+                                                    style: const TextStyle(
+                                                      color: Color(0xFFFFFFFF),
+                                                      fontSize: 9,
+                                                      fontWeight: FontWeight.bold,
+                                                      letterSpacing: 0.5,
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
+                                            if (rating['rate'] != null)
+                                              Positioned(
+                                                bottom: 8,
+                                                left: 8,
+                                                child: Container(
+                                                  padding: const EdgeInsets.symmetric(
+                                                    horizontal: 5,
+                                                    vertical: 3,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    color: const Color(0xFFFFFFFF),
+                                                    border: Border.all(
+                                                      color: const Color(0xFF000000),
+                                                      width: 1,
+                                                    ),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: [
+                                                      const Icon(
+                                                        Icons.star,
+                                                        size: 10,
+                                                        color: Color(0xFF000000),
+                                                      ),
+                                                      const SizedBox(width: 2),
+                                                      Text(
+                                                        '${rating['rate']}',
+                                                        style: const TextStyle(
+                                                          color: Color(0xFF000000),
+                                                          fontSize: 9,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
                                           ],
                                         ),
                                       ),
                                       Expanded(
                                         flex: 2,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8),
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              Text(
-                                                product['title'] ?? '',
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              const Spacer(),
-                                              Text(
-                                                '${finalPrice?.toStringAsFixed(2) ?? '-'} \$',
-                                                style: TextStyle(
-                                                  color: Colors.green.shade400,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              if (product['stock'] != null)
-                                                Text(
-                                                  'Stock: ${product['stock']}',
-                                                  style: TextStyle(
-                                                    color: Colors.grey.shade400,
-                                                    fontSize: 10,
+                                              if (product['brand'] != null)
+                                                Padding(
+                                                  padding: const EdgeInsets.only(bottom: 2),
+                                                  child: Container(
+                                                    padding: const EdgeInsets.symmetric(
+                                                        horizontal: 4, vertical: 1),
+                                                    decoration: const BoxDecoration(
+                                                      color: Color(0xFF000000),
+                                                    ),
+                                                    child: Text(
+                                                      product['brand']!.toUpperCase(),
+                                                      style: const TextStyle(
+                                                        fontSize: 6,
+                                                        color: Color(0xFFFFFFFF),
+                                                        fontWeight: FontWeight.bold,
+                                                        letterSpacing: 0.8,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
+                                              Flexible(
+                                                child: Text(
+                                                  product['title'] ?? '',
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: const TextStyle(
+                                                    fontSize: 11,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Color(0xFF000000),
+                                                    height: 1.1,
+                                                    letterSpacing: 0.1,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 3),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                crossAxisAlignment: CrossAxisAlignment.end,
+                                                children: [
+                                                  Flexible(
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      mainAxisSize: MainAxisSize.min,
+                                                      children: [
+                                                        if (product['discountPercentage'] != null)
+                                                          Padding(
+                                                            padding: const EdgeInsets.only(bottom: 0),
+                                                            child: Text(
+                                                              '${product['price']} \$',
+                                                              style: const TextStyle(
+                                                                fontSize: 8,
+                                                                color: Color(0xFF999999),
+                                                                decoration: TextDecoration.lineThrough,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        Text(
+                                                          '${finalPrice?.toStringAsFixed(2) ?? '-'} \$',
+                                                          style: const TextStyle(
+                                                            fontSize: 13,
+                                                            fontWeight: FontWeight.bold,
+                                                            color: Color(0xFF000000),
+                                                            letterSpacing: 0.2,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  if (product['stock'] != null)
+                                                    Container(
+                                                      padding: const EdgeInsets.symmetric(
+                                                          horizontal: 2, vertical: 1),
+                                                      decoration: BoxDecoration(
+                                                        color: const Color(0xFF000000).withValues(alpha: 0.1),
+                                                        border: Border.all(
+                                                          color: const Color(0xFF000000),
+                                                          width: 1,
+                                                        ),
+                                                      ),
+                                                      child: Row(
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        children: [
+                                                          const Icon(
+                                                            Icons.check_circle,
+                                                            size: 6,
+                                                            color: Color(0xFF000000),
+                                                          ),
+                                                          const SizedBox(width: 1),
+                                                          Text(
+                                                            '${product['stock']}',
+                                                            style: const TextStyle(
+                                                              fontSize: 6,
+                                                              fontWeight: FontWeight.bold,
+                                                              color: Color(0xFF000000),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                ],
+                                              ),
+                                              const SizedBox(height: 6),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                    width: 36,
+                                                    height: 36,
+                                                    decoration: BoxDecoration(
+                                                      color: const Color(0xFF000000),
+                                                      border: Border.all(
+                                                        color: const Color(0xFF000000),
+                                                        width: 1,
+                                                      ),
+                                                    ),
+                                                    child: Material(
+                                                      color: Colors.transparent,
+                                                      child: InkWell(
+                                                        onTap: () => _showEditProductDialog(product),
+                                                        child: const Center(
+                                                          child: Icon(
+                                                            Icons.edit,
+                                                            size: 18,
+                                                            color: Color(0xFFFFFFFF),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width: 8),
+                                                  Container(
+                                                    width: 36,
+                                                    height: 36,
+                                                    decoration: BoxDecoration(
+                                                      color: const Color(0xFFFFFFFF),
+                                                      border: Border.all(
+                                                        color: const Color(0xFF000000),
+                                                        width: 1,
+                                                      ),
+                                                    ),
+                                                    child: Material(
+                                                      color: Colors.transparent,
+                                                      child: InkWell(
+                                                        onTap: () => _showDeleteProductDialog(product),
+                                                        child: const Center(
+                                                          child: Icon(
+                                                            Icons.delete,
+                                                            size: 18,
+                                                            color: Color(0xFF000000),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -952,11 +1276,12 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
           ),
         ),
         Positioned(
-          bottom: 16,
-          right: 16,
+          bottom: 24,
+          right: 24,
           child: FloatingActionButton(
             onPressed: _showAddProductDialog,
-            backgroundColor: Colors.green,
+            backgroundColor: const Color(0xFF000000),
+            foregroundColor: const Color(0xFFFFFFFF),
             child: const Icon(Icons.add),
           ),
         ),

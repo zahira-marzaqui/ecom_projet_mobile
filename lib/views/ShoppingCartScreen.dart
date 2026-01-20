@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miniprojet/services/ShoppingCartService.dart';
+import 'package:miniprojet/widgets/network_image_widget.dart';
 
 class ShoppingCartScreen extends StatelessWidget {
   const ShoppingCartScreen({super.key});
@@ -87,21 +88,11 @@ class ShoppingCartScreen extends StatelessWidget {
                               // Image du produit
                               ClipRRect(
                                 child: imageUrl != null && imageUrl.isNotEmpty
-                                    ? Image.network(
-                                        imageUrl,
+                                    ? NetworkImageWidget(
+                                        imageUrl: imageUrl,
                                         width: 100,
                                         height: 100,
                                         fit: BoxFit.cover,
-                                        errorBuilder: (context, error, stackTrace) =>
-                                            Container(
-                                          width: 100,
-                                          height: 100,
-                                          color: const Color(0xFFF5F5F5),
-                                          child: const Icon(
-                                            Icons.image_not_supported,
-                                            color: Color(0xFF999999),
-                                          ),
-                                        ),
                                       )
                                     : Container(
                                         width: 100,

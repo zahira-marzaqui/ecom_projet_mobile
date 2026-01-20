@@ -87,8 +87,8 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey.shade900,
-        title: const Text('Ajouter une catégorie', style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFFFFFFFF),
+        title: const Text('Ajouter une catégorie', style: TextStyle(color: Color(0xFF000000))),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -185,8 +185,8 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey.shade900,
-        title: const Text('Modifier la catégorie', style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFFFFFFFF),
+        title: const Text('Modifier la catégorie', style: TextStyle(color: Color(0xFF000000))),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -231,15 +231,15 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
           ),
           TextButton(
             onPressed: () async {
-              if (nameController.text.trim().isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Veuillez entrer un nom de catégorie'),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-                return;
-              }
+                if (nameController.text.trim().isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Veuillez entrer un nom de catégorie'),
+                      backgroundColor: Color(0xFF000000),
+                    ),
+                  );
+                  return;
+                }
 
               final updates = {
                 'name': nameController.text.trim(),
@@ -256,7 +256,7 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Catégorie modifiée avec succès'),
-                    backgroundColor: Colors.green,
+                    backgroundColor: Color(0xFF000000),
                   ),
                 );
               } else {
@@ -264,12 +264,12 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Erreur lors de la modification'),
-                    backgroundColor: Colors.red,
+                    backgroundColor: Color(0xFF000000),
                   ),
                 );
               }
             },
-            child: const Text('Enregistrer', style: TextStyle(color: Colors.blueAccent)),
+            child: const Text('Enregistrer', style: TextStyle(color: Color(0xFF000000))),
           ),
         ],
       ),
@@ -333,16 +333,16 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey.shade900,
-        title: const Text('Supprimer la catégorie', style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFFFFFFFF),
+        title: const Text('Supprimer la catégorie', style: TextStyle(color: Color(0xFF000000))),
         content: Text(
           'Êtes-vous sûr de vouloir supprimer "${category['name']}" ?\nCette action est irréversible.',
-          style: const TextStyle(color: Colors.grey),
+          style: const TextStyle(color: Color(0xFF666666)),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Annuler', style: TextStyle(color: Colors.grey)),
+            child: const Text('Annuler', style: TextStyle(color: Color(0xFF666666))),
           ),
           TextButton(
             onPressed: () async {
@@ -356,7 +356,7 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Catégorie supprimée avec succès'),
-                    backgroundColor: Colors.green,
+                    backgroundColor: Color(0xFF000000),
                   ),
                 );
               } else {
@@ -364,12 +364,12 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Erreur lors de la suppression'),
-                    backgroundColor: Colors.red,
+                    backgroundColor: Color(0xFF000000),
                   ),
                 );
               }
             },
-            child: const Text('Supprimer', style: TextStyle(color: Colors.red)),
+            child: const Text('Supprimer', style: TextStyle(color: Color(0xFF000000))),
           ),
         ],
       ),
@@ -381,31 +381,37 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
     return Stack(
       children: [
         Container(
-          color: Colors.black,
+          color: const Color(0xFFFFFFFF),
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
-                color: Colors.black,
+                padding: const EdgeInsets.all(24),
+                color: const Color(0xFFFFFFFF),
                 child: Column(
                   children: [
                     Text(
-                      '${_categories.length} catégorie(s) dans Firebase',
-                      style: TextStyle(
-                        color: Colors.grey.shade400,
+                      '${_categories.length} CATÉGORIE(S) DANS FIREBASE',
+                      style: const TextStyle(
+                        color: Color(0xFF000000),
                         fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1.2,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 16),
                     TextField(
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(
+                        color: Color(0xFF000000),
+                        fontSize: 15,
+                        letterSpacing: 0.3,
+                      ),
                       decoration: InputDecoration(
                         hintText: 'Rechercher une catégorie...',
-                        hintStyle: TextStyle(color: Colors.grey.shade500),
-                        prefixIcon: const Icon(Icons.search, color: Colors.blueAccent),
+                        hintStyle: const TextStyle(color: Color(0xFF999999)),
+                        prefixIcon: const Icon(Icons.search, color: Color(0xFF666666), size: 20),
                         suffixIcon: _searchQuery.isNotEmpty
                             ? IconButton(
-                                icon: const Icon(Icons.clear, color: Colors.grey),
+                                icon: const Icon(Icons.clear, color: Color(0xFF000000)),
                                 onPressed: () {
                                   setState(() {
                                     _searchQuery = '';
@@ -414,10 +420,19 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
                               )
                             : null,
                         filled: true,
-                        fillColor: Colors.grey.shade900,
+                        fillColor: const Color(0xFFFFFFFF),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(0),
+                          borderSide: const BorderSide(color: Color(0xFFE5E5E5), width: 1),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(0),
+                          borderSide: const BorderSide(color: Color(0xFFE5E5E5), width: 1),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(0),
+                          borderSide: const BorderSide(color: Color(0xFF000000), width: 1.5),
                         ),
                       ),
                       onChanged: (value) {
@@ -431,118 +446,175 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
               ),
               Expanded(
                 child: _isLoading
-                    ? const Center(child: CircularProgressIndicator())
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF000000)),
+                        ),
+                      )
                     : _filteredCategories.isEmpty
                         ? Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.category_outlined, size: 64, color: Colors.grey.shade600),
+                                const Icon(Icons.category_outlined, size: 64, color: Color(0xFF999999)),
                                 const SizedBox(height: 16),
-                                Text(
+                                const Text(
                                   'Aucune catégorie trouvée',
-                                  style: TextStyle(color: Colors.grey.shade400),
+                                  style: TextStyle(color: Color(0xFF000000)),
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
                                   'Total: ${_categories.length} catégorie(s)',
-                                  style: TextStyle(color: Colors.grey.shade500, fontSize: 12),
+                                  style: const TextStyle(color: Color(0xFF666666), fontSize: 12),
                                 ),
                               ],
                             ),
                           )
                         : RefreshIndicator(
                             onRefresh: _loadCategories,
-                            color: Colors.blueAccent,
+                            color: const Color(0xFF000000),
                             child: GridView.builder(
-                              padding: const EdgeInsets.all(16),
+                              padding: const EdgeInsets.all(24),
                               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                childAspectRatio: 0.85,
-                                crossAxisSpacing: 16,
-                                mainAxisSpacing: 16,
+                                childAspectRatio: 0.75,
+                                crossAxisSpacing: 24,
+                                mainAxisSpacing: 24,
                               ),
                               itemCount: _filteredCategories.length,
                               itemBuilder: (context, index) {
                                 final category = _filteredCategories[index];
                                 final categoryName = category['name']?.toString() ?? 'Sans nom';
-                                final colors = _getCategoryColors(categoryName);
                                 
-                                return Card(
-                                  elevation: 4,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      gradient: LinearGradient(
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                        colors: [
-                                          colors[0],
-                                          colors[1],
-                                        ],
-                                      ),
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFFFFFFF),
+                                    border: Border.all(
+                                      color: const Color(0xFF000000),
+                                      width: 1.5,
                                     ),
-                                    child: Stack(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: const Color(0xFF000000).withValues(alpha: 0.08),
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 4),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(16),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                padding: const EdgeInsets.all(12),
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white.withValues(alpha: 0.2),
-                                                  borderRadius: BorderRadius.circular(12),
-                                                ),
-                                                child: Icon(
-                                                  _getCategoryIcon(categoryName),
-                                                  color: Colors.white,
-                                                  size: 32,
-                                                ),
-                                              ),
-                                              const Spacer(),
-                                              Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    categoryName,
-                                                    style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 16,
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                                    maxLines: 2,
-                                                    overflow: TextOverflow.ellipsis,
-                                                  ),
-                                                  const SizedBox(height: 4),
-                                                  if (category['description'] != null &&
-                                                      category['description'].toString().isNotEmpty)
-                                                    Text(
-                                                      category['description'],
-                                                      style: TextStyle(
-                                                        color: Colors.white.withValues(alpha: 0.8),
-                                                        fontSize: 11,
-                                                      ),
-                                                      maxLines: 2,
-                                                      overflow: TextOverflow.ellipsis,
-                                                    )
-                                                  else
-                                                    Text(
-                                                      'Catégorie extraite',
-                                                      style: TextStyle(
-                                                        color: Colors.white.withValues(alpha: 0.7),
-                                                        fontSize: 11,
-                                                      ),
-                                                    ),
-                                                ],
-                                              ),
-                                            ],
+                                        Container(
+                                          width: 64,
+                                          height: 64,
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFF000000),
+                                            border: Border.all(
+                                              color: const Color(0xFF000000),
+                                              width: 1,
+                                            ),
                                           ),
+                                          child: Icon(
+                                            _getCategoryIcon(categoryName),
+                                            color: const Color(0xFFFFFFFF),
+                                            size: 32,
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Flexible(
+                                          child: Text(
+                                            categoryName.toUpperCase(),
+                                            style: const TextStyle(
+                                              color: Color(0xFF000000),
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600,
+                                              letterSpacing: 1.5,
+                                              height: 1.3,
+                                            ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        if (category['description'] != null &&
+                                            category['description'].toString().isNotEmpty)
+                                          Flexible(
+                                            child: Text(
+                                              category['description'],
+                                              style: const TextStyle(
+                                                color: Color(0xFF666666),
+                                                fontSize: 10,
+                                                height: 1.2,
+                                              ),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          )
+                                        else
+                                          const Text(
+                                            'Catégorie extraite',
+                                            style: TextStyle(
+                                              color: Color(0xFF999999),
+                                              fontSize: 10,
+                                            ),
+                                          ),
+                                        const SizedBox(height: 12),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: 36,
+                                              height: 36,
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xFF000000),
+                                                border: Border.all(
+                                                  color: const Color(0xFF000000),
+                                                  width: 1,
+                                                ),
+                                              ),
+                                              child: Material(
+                                                color: Colors.transparent,
+                                                child: InkWell(
+                                                  onTap: () => _showEditCategoryDialog(category),
+                                                  child: const Center(
+                                                    child: Icon(
+                                                      Icons.edit,
+                                                      size: 18,
+                                                      color: Color(0xFFFFFFFF),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Container(
+                                              width: 36,
+                                              height: 36,
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xFFFFFFFF),
+                                                border: Border.all(
+                                                  color: const Color(0xFF000000),
+                                                  width: 1,
+                                                ),
+                                              ),
+                                              child: Material(
+                                                color: Colors.transparent,
+                                                child: InkWell(
+                                                  onTap: () => _showDeleteCategoryDialog(category),
+                                                  child: const Center(
+                                                    child: Icon(
+                                                      Icons.delete,
+                                                      size: 18,
+                                                      color: Color(0xFF000000),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -553,6 +625,16 @@ class _AdminCategoriesScreenState extends State<AdminCategoriesScreen> {
                           ),
               ),
             ],
+          ),
+        ),
+        Positioned(
+          bottom: 24,
+          right: 24,
+          child: FloatingActionButton(
+            onPressed: _showAddCategoryDialog,
+            backgroundColor: const Color(0xFF000000),
+            foregroundColor: const Color(0xFFFFFFFF),
+            child: const Icon(Icons.add),
           ),
         ),
       ],

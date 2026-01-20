@@ -71,106 +71,106 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
-          backgroundColor: Colors.grey.shade900,
-          title: const Text('Ajouter un utilisateur', style: TextStyle(color: Colors.white)),
+          backgroundColor: const Color(0xFFFFFFFF),
+          title: const Text('Ajouter un utilisateur', style: TextStyle(color: Color(0xFF000000))),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
                   controller: emailController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Color(0xFF000000)),
                   decoration: const InputDecoration(
                     labelText: 'Email',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: passwordController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Color(0xFF000000)),
                   obscureText: true,
                   decoration: const InputDecoration(
                     labelText: 'Mot de passe',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: usernameController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Color(0xFF000000)),
                   decoration: const InputDecoration(
                     labelText: 'Nom d\'utilisateur',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: firstNameController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Color(0xFF000000)),
                   decoration: const InputDecoration(
                     labelText: 'Prénom',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: lastNameController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Color(0xFF000000)),
                   decoration: const InputDecoration(
                     labelText: 'Nom',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
                   value: selectedRole,
-                  dropdownColor: Colors.grey.shade800,
-                  style: const TextStyle(color: Colors.white),
+                  dropdownColor: const Color(0xFFFFFFFF),
+                  style: const TextStyle(color: Color(0xFF000000)),
                   decoration: const InputDecoration(
                     labelText: 'Rôle',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                   items: const [
-                    DropdownMenuItem(value: 'client', child: Text('Client')),
-                    DropdownMenuItem(value: 'vendeur', child: Text('Vendeur')),
-                    DropdownMenuItem(value: 'admin', child: Text('Admin')),
+                    DropdownMenuItem(value: 'client', child: Text('Client', style: TextStyle(color: Color(0xFF000000)))),
+                    DropdownMenuItem(value: 'vendeur', child: Text('Vendeur', style: TextStyle(color: Color(0xFF000000)))),
+                    DropdownMenuItem(value: 'admin', child: Text('Admin', style: TextStyle(color: Color(0xFF000000)))),
                   ],
                   onChanged: (value) {
                     setDialogState(() {
@@ -219,7 +219,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Utilisateur créé avec succès'),
-                      backgroundColor: Colors.green,
+                      backgroundColor: Color(0xFF000000),
                     ),
                   );
                 } else {
@@ -227,12 +227,12 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Erreur: Email déjà utilisé'),
-                      backgroundColor: Colors.red,
+                      backgroundColor: Color(0xFF000000),
                     ),
                   );
                 }
               },
-              child: const Text('Créer', style: TextStyle(color: Colors.blueAccent)),
+              child: const Text('Créer', style: TextStyle(color: Color(0xFF000000))),
             ),
           ],
         ),
@@ -251,90 +251,90 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
-          backgroundColor: Colors.grey.shade900,
-          title: const Text('Modifier l\'utilisateur', style: TextStyle(color: Colors.white)),
+          backgroundColor: const Color(0xFFFFFFFF),
+          title: const Text('Modifier l\'utilisateur', style: TextStyle(color: Color(0xFF000000))),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
                   controller: emailController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Color(0xFF000000)),
                   decoration: const InputDecoration(
                     labelText: 'Email',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: usernameController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Color(0xFF000000)),
                   decoration: const InputDecoration(
                     labelText: 'Nom d\'utilisateur',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: firstNameController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Color(0xFF000000)),
                   decoration: const InputDecoration(
                     labelText: 'Prénom',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: lastNameController,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Color(0xFF000000)),
                   decoration: const InputDecoration(
                     labelText: 'Nom',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
                   value: selectedRole,
-                  dropdownColor: Colors.grey.shade800,
-                  style: const TextStyle(color: Colors.white),
+                  dropdownColor: const Color(0xFFFFFFFF),
+                  style: const TextStyle(color: Color(0xFF000000)),
                   decoration: const InputDecoration(
                     labelText: 'Rôle',
-                    labelStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Color(0xFF999999)),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
+                      borderSide: BorderSide(color: Color(0xFFE5E5E5)),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueAccent),
+                      borderSide: BorderSide(color: Color(0xFF000000)),
                     ),
                   ),
                   items: const [
-                    DropdownMenuItem(value: 'client', child: Text('Client')),
-                    DropdownMenuItem(value: 'vendeur', child: Text('Vendeur')),
-                    DropdownMenuItem(value: 'admin', child: Text('Admin')),
+                    DropdownMenuItem(value: 'client', child: Text('Client', style: TextStyle(color: Color(0xFF000000)))),
+                    DropdownMenuItem(value: 'vendeur', child: Text('Vendeur', style: TextStyle(color: Color(0xFF000000)))),
+                    DropdownMenuItem(value: 'admin', child: Text('Admin', style: TextStyle(color: Color(0xFF000000)))),
                   ],
                   onChanged: (value) {
                     setDialogState(() {
@@ -370,7 +370,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Utilisateur modifié avec succès'),
-                      backgroundColor: Colors.green,
+                      backgroundColor: Color(0xFF000000),
                     ),
                   );
                 } else {
@@ -378,12 +378,12 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Erreur lors de la modification'),
-                      backgroundColor: Colors.red,
+                      backgroundColor: Color(0xFF000000),
                     ),
                   );
                 }
               },
-              child: const Text('Enregistrer', style: TextStyle(color: Colors.blueAccent)),
+              child: const Text('Enregistrer', style: TextStyle(color: Color(0xFF000000))),
             ),
           ],
         ),
@@ -395,16 +395,16 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey.shade900,
-        title: const Text('Supprimer l\'utilisateur', style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFFFFFFFF),
+        title: const Text('Supprimer l\'utilisateur', style: TextStyle(color: Color(0xFF000000))),
         content: Text(
           'Êtes-vous sûr de vouloir supprimer "${user['email']}" ?\nCette action est irréversible.',
-          style: const TextStyle(color: Colors.grey),
+          style: const TextStyle(color: Color(0xFF666666)),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Annuler', style: TextStyle(color: Colors.grey)),
+            child: const Text('Annuler', style: TextStyle(color: Color(0xFF666666))),
           ),
           TextButton(
             onPressed: () async {
@@ -418,7 +418,7 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Utilisateur supprimé avec succès'),
-                    backgroundColor: Colors.green,
+                    backgroundColor: Color(0xFF000000),
                   ),
                 );
               } else {
@@ -426,12 +426,12 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Erreur lors de la suppression'),
-                    backgroundColor: Colors.red,
+                    backgroundColor: Color(0xFF000000),
                   ),
                 );
               }
             },
-            child: const Text('Supprimer', style: TextStyle(color: Colors.red)),
+            child: const Text('Supprimer', style: TextStyle(color: Color(0xFF000000))),
           ),
         ],
       ),
@@ -456,24 +456,28 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
     return Stack(
       children: [
         Container(
-          color: Colors.black,
+          color: const Color(0xFFFFFFFF),
           child: Column(
             children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            color: Colors.black,
+            padding: const EdgeInsets.all(24),
+            color: const Color(0xFFFFFFFF),
             child: Column(
               children: [
                 const SizedBox(height: 8),
                 TextField(
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(
+                        color: Color(0xFF000000),
+                        fontSize: 15,
+                        letterSpacing: 0.3,
+                      ),
                       decoration: InputDecoration(
                         hintText: 'Rechercher un utilisateur...',
-                        hintStyle: TextStyle(color: Colors.grey.shade500),
-                        prefixIcon: const Icon(Icons.search, color: Colors.blueAccent),
+                        hintStyle: const TextStyle(color: Color(0xFF999999)),
+                        prefixIcon: const Icon(Icons.search, color: Color(0xFF666666), size: 20),
                         suffixIcon: _searchQuery.isNotEmpty
                             ? IconButton(
-                                icon: const Icon(Icons.clear, color: Colors.grey),
+                                icon: const Icon(Icons.clear, color: Color(0xFF000000)),
                                 onPressed: () {
                                   setState(() {
                                     _searchQuery = '';
@@ -482,10 +486,19 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                               )
                             : null,
                         filled: true,
-                        fillColor: Colors.grey.shade900,
+                        fillColor: const Color(0xFFFFFFFF),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(0),
+                          borderSide: const BorderSide(color: Color(0xFFE5E5E5), width: 1),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(0),
+                          borderSide: const BorderSide(color: Color(0xFFE5E5E5), width: 1),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(0),
+                          borderSide: const BorderSide(color: Color(0xFF000000), width: 1.5),
                         ),
                       ),
                       onChanged: (value) {
@@ -514,15 +527,21 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                             style: ButtonStyle(
                               backgroundColor: WidgetStateProperty.resolveWith((states) {
                                 if (states.contains(WidgetState.selected)) {
-                                  return Colors.blueAccent;
+                                  return const Color(0xFF000000);
                                 }
-                                return Colors.grey.shade800;
+                                return const Color(0xFFFFFFFF);
                               }),
                               foregroundColor: WidgetStateProperty.resolveWith((states) {
                                 if (states.contains(WidgetState.selected)) {
-                                  return Colors.white;
+                                  return const Color(0xFFFFFFFF);
                                 }
-                                return Colors.grey;
+                                return const Color(0xFF000000);
+                              }),
+                              side: WidgetStateProperty.resolveWith((states) {
+                                return const BorderSide(
+                                  color: Color(0xFF000000),
+                                  width: 1,
+                                );
                               }),
                             ),
                           ),
@@ -535,66 +554,81 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
           ),
               Expanded(
                 child: _isLoading
-                    ? const Center(child: CircularProgressIndicator())
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF000000)),
+                        ),
+                      )
                     : _filteredUsers.isEmpty
                         ? Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.people_outline, size: 64, color: Colors.grey.shade600),
+                                const Icon(Icons.people_outline, size: 64, color: Color(0xFF999999)),
                                 const SizedBox(height: 16),
-                                Text(
+                                const Text(
                                   'Aucun utilisateur trouvé',
-                                  style: TextStyle(color: Colors.grey.shade400),
+                                  style: TextStyle(color: Color(0xFF000000)),
                                 ),
                               ],
                             ),
                           )
                         : RefreshIndicator(
                             onRefresh: _loadUsers,
-                            color: Colors.blueAccent,
+                            color: const Color(0xFF000000),
                             child: ListView.builder(
-                              padding: const EdgeInsets.all(8),
+                              padding: const EdgeInsets.all(24),
                               itemCount: _filteredUsers.length,
                               itemBuilder: (context, index) {
                                 final user = _filteredUsers[index];
                                 return Card(
-                                  color: Colors.grey.shade900,
-                                  margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                                  color: const Color(0xFFFFFFFF),
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(0),
+                                    side: const BorderSide(color: Color(0xFFE5E5E5), width: 1),
+                                  ),
+                                  margin: const EdgeInsets.only(bottom: 12),
                                   child: ListTile(
+                                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                                     leading: CircleAvatar(
-                                      backgroundColor: _getRoleColor(user['role']).withValues(alpha: 0.2),
-                                      child: Icon(
+                                      backgroundColor: const Color(0xFF000000).withValues(alpha: 0.1),
+                                      child: const Icon(
                                         Icons.person,
-                                        color: _getRoleColor(user['role']),
+                                        color: Color(0xFF000000),
                                       ),
                                     ),
                                     title: Text(
                                       user['email'] ?? 'N/A',
-                                      style: const TextStyle(color: Colors.white),
+                                      style: const TextStyle(
+                                        color: Color(0xFF000000),
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                     subtitle: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         if (user['username'] != null)
-                                          Text(
-                                            '@${user['username']}',
-                                            style: TextStyle(color: Colors.grey.shade400, fontSize: 12),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 4),
+                                            child: Text(
+                                              '@${user['username']}',
+                                              style: const TextStyle(color: Color(0xFF666666), fontSize: 12),
+                                            ),
                                           ),
-                                        const SizedBox(height: 4),
+                                        const SizedBox(height: 6),
                                         Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                          decoration: BoxDecoration(
-                                            color: _getRoleColor(user['role']).withValues(alpha: 0.2),
-                                            borderRadius: BorderRadius.circular(12),
-                                            border: Border.all(color: _getRoleColor(user['role'])),
+                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                          decoration: const BoxDecoration(
+                                            color: Color(0xFF000000),
                                           ),
                                           child: Text(
                                             (user['role'] ?? 'client').toUpperCase(),
-                                            style: TextStyle(
-                                              color: _getRoleColor(user['role']),
+                                            style: const TextStyle(
+                                              color: Color(0xFFFFFFFF),
                                               fontSize: 10,
                                               fontWeight: FontWeight.bold,
+                                              letterSpacing: 1.0,
                                             ),
                                           ),
                                         ),
@@ -603,13 +637,54 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
                                     trailing: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        IconButton(
-                                          icon: const Icon(Icons.edit, color: Colors.blueAccent),
-                                          onPressed: () => _showEditUserDialog(user),
+                                        Container(
+                                          width: 36,
+                                          height: 36,
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFF000000),
+                                            border: Border.all(
+                                              color: const Color(0xFF000000),
+                                              width: 1,
+                                            ),
+                                          ),
+                                          child: Material(
+                                            color: Colors.transparent,
+                                            child: InkWell(
+                                              onTap: () => _showEditUserDialog(user),
+                                              child: const Center(
+                                                child: Icon(
+                                                  Icons.edit,
+                                                  size: 18,
+                                                  color: Color(0xFFFFFFFF),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                        IconButton(
-                                          icon: const Icon(Icons.delete, color: Colors.red),
-                                          onPressed: () => _showDeleteUserDialog(user),
+                                        const SizedBox(width: 8),
+                                        Container(
+                                          width: 36,
+                                          height: 36,
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFFFFFFFF),
+                                            border: Border.all(
+                                              color: const Color(0xFF000000),
+                                              width: 1,
+                                            ),
+                                          ),
+                                          child: Material(
+                                            color: Colors.transparent,
+                                            child: InkWell(
+                                              onTap: () => _showDeleteUserDialog(user),
+                                              child: const Center(
+                                                child: Icon(
+                                                  Icons.delete,
+                                                  size: 18,
+                                                  color: Color(0xFF000000),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -623,11 +698,12 @@ class _AdminUsersScreenState extends State<AdminUsersScreen> {
           ),
         ),
         Positioned(
-          bottom: 16,
-          right: 16,
+          bottom: 24,
+          right: 24,
           child: FloatingActionButton(
             onPressed: _showAddUserDialog,
-            backgroundColor: Colors.blueAccent,
+            backgroundColor: const Color(0xFF000000),
+            foregroundColor: const Color(0xFFFFFFFF),
             child: const Icon(Icons.add),
           ),
         ),

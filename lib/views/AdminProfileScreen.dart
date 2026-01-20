@@ -11,20 +11,20 @@ class AdminProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mon Profil'),
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFFFFFFFF),
+        foregroundColor: const Color(0xFF000000),
       ),
       body: Container(
-        color: Colors.black,
+        color: const Color(0xFFFFFFFF),
         child: currentUser == null
             ? const Center(
                 child: Text(
                   'Aucun utilisateur connecté',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Color(0xFF000000)),
                 ),
               )
             : SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -37,44 +37,43 @@ class AdminProfileScreen extends StatelessWidget {
                             height: 100,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                colors: [
-                                  Colors.red,
-                                  Colors.red.shade700,
-                                ],
+                              color: const Color(0xFF000000).withValues(alpha: 0.1),
+                              border: Border.all(
+                                color: const Color(0xFF000000),
+                                width: 2,
                               ),
                             ),
                             child: const Icon(
                               Icons.admin_panel_settings,
                               size: 50,
-                              color: Colors.white,
+                              color: Color(0xFF000000),
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 24),
                           Text(
                             '${currentUser['firstName'] ?? ''} ${currentUser['lastName'] ?? ''}'.trim().isEmpty
                                 ? currentUser['username'] ?? currentUser['email'] ?? 'Admin'
                                 : '${currentUser['firstName'] ?? ''} ${currentUser['lastName'] ?? ''}'.trim(),
                             style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF000000),
+                              fontSize: 28,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.5,
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 12),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: Colors.red.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.red),
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF000000),
                             ),
                             child: const Text(
                               'ADMIN',
                               style: TextStyle(
-                                color: Colors.red,
+                                color: Color(0xFFFFFFFF),
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
+                                letterSpacing: 1.2,
                               ),
                             ),
                           ),
@@ -119,7 +118,11 @@ class AdminProfileScreen extends StatelessWidget {
                       future: MongoDatabase.getAdminStatistics(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.waiting) {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF000000)),
+                            ),
+                          );
                         }
 
                         final stats = snapshot.data ?? {};
@@ -183,11 +186,12 @@ class AdminProfileScreen extends StatelessWidget {
 
   Widget _buildSectionTitle(String title) {
     return Text(
-      title,
-      style: TextStyle(
-        color: Colors.grey.shade300,
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
+      title.toUpperCase(),
+      style: const TextStyle(
+        color: Color(0xFF666666),
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 1.2,
       ),
     );
   }
@@ -198,9 +202,11 @@ class AdminProfileScreen extends StatelessWidget {
     required String value,
   }) {
     return Card(
-      color: Colors.grey.shade900,
+      color: const Color(0xFFFFFFFF),
+      elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(0),
+        side: const BorderSide(color: Color(0xFFE5E5E5), width: 1),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -209,10 +215,13 @@ class AdminProfileScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.red.withValues(alpha: 0.2),
-                borderRadius: BorderRadius.circular(8),
+                color: const Color(0xFF000000).withValues(alpha: 0.1),
+                border: Border.all(
+                  color: const Color(0xFF000000),
+                  width: 1,
+                ),
               ),
-              child: Icon(icon, color: Colors.red, size: 24),
+              child: Icon(icon, color: const Color(0xFF000000), size: 24),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -220,19 +229,22 @@ class AdminProfileScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    label,
-                    style: TextStyle(
-                      color: Colors.grey.shade400,
-                      fontSize: 12,
+                    label.toUpperCase(),
+                    style: const TextStyle(
+                      color: Color(0xFF666666),
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.2,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     value,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: Color(0xFF000000),
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.2,
                     ),
                   ),
                 ],
@@ -251,30 +263,45 @@ class AdminProfileScreen extends StatelessWidget {
     required Color color,
   }) {
     return Card(
-      color: Colors.grey.shade900,
+      color: const Color(0xFFFFFFFF),
+      elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(0),
+        side: const BorderSide(color: Color(0xFF000000), width: 1.5),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Icon(icon, color: color, size: 32),
-            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: const Color(0xFF000000).withValues(alpha: 0.1),
+                border: Border.all(
+                  color: const Color(0xFF000000),
+                  width: 1,
+                ),
+              ),
+              child: Icon(icon, color: const Color(0xFF000000), size: 28),
+            ),
+            const SizedBox(height: 12),
             Text(
               value,
-              style: TextStyle(
-                color: color,
+              style: const TextStyle(
+                color: Color(0xFF000000),
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
+                letterSpacing: 0.5,
               ),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 6),
             Text(
-              label,
-              style: TextStyle(
-                color: Colors.grey.shade400,
-                fontSize: 12,
+              label.toUpperCase(),
+              style: const TextStyle(
+                color: Color(0xFF666666),
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.2,
               ),
               textAlign: TextAlign.center,
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miniprojet/services/database.dart';
+import 'package:miniprojet/widgets/network_image_widget.dart';
 
 class VendeurDashboard extends StatefulWidget {
   const VendeurDashboard({super.key});
@@ -400,46 +401,11 @@ class _VendeurDashboardState extends State<VendeurDashboard> {
                                                         p['image'].toString().trim().isNotEmpty &&
                                                         (p['image'].toString().startsWith('http://') || 
                                                          p['image'].toString().startsWith('https://')))
-                                                    ? Image.network(
-                                                        p['image'].toString().trim(),
+                                                    ? NetworkImageWidget(
+                                                        imageUrl: p['image'].toString().trim(),
                                                         width: double.infinity,
                                                         height: double.infinity,
                                                         fit: BoxFit.contain,
-                                                        loadingBuilder: (context, child, loadingProgress) {
-                                                          if (loadingProgress == null) return child;
-                                                          return Container(
-                                                            color: const Color(0xFFF5F5F5),
-                                                            child: const Center(
-                                                              child: CircularProgressIndicator(
-                                                                strokeWidth: 2,
-                                                                valueColor: AlwaysStoppedAnimation<Color>(
-                                                                  Color(0xFF000000),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                        errorBuilder: (_, __, ___) => Container(
-                                                          color: const Color(0xFFF5F5F5),
-                                                          child: const Column(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                            children: [
-                                                              Icon(
-                                                                Icons.image_not_supported,
-                                                                size: 48,
-                                                                color: Color(0xFF999999),
-                                                              ),
-                                                              SizedBox(height: 8),
-                                                              Text(
-                                                                'Image non disponible',
-                                                                style: TextStyle(
-                                                                  fontSize: 10,
-                                                                  color: Color(0xFF999999),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
                                                       )
                                                     : Container(
                                                         color: const Color(0xFFF5F5F5),

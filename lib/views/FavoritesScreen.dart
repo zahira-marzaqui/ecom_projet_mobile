@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:miniprojet/services/FavoritesService.dart';
 import 'package:miniprojet/services/ShoppingCartService.dart';
+import 'package:miniprojet/widgets/network_image_widget.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
@@ -101,33 +102,11 @@ class FavoritesScreen extends StatelessWidget {
                                 color: Color(0xFFF5F5F5),
                               ),
                               child: imageUrl != null && imageUrl.isNotEmpty
-                                  ? Image.network(
-                                      imageUrl,
+                                  ? NetworkImageWidget(
+                                      imageUrl: imageUrl,
                                       width: double.infinity,
                                       height: double.infinity,
                                       fit: BoxFit.contain,
-                                      loadingBuilder: (context, child, loadingProgress) {
-                                        if (loadingProgress == null) return child;
-                                        return Container(
-                                          color: const Color(0xFFF5F5F5),
-                                          child: const Center(
-                                            child: CircularProgressIndicator(
-                                              strokeWidth: 2,
-                                              valueColor: AlwaysStoppedAnimation<Color>(
-                                                Color(0xFF000000),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      errorBuilder: (_, __, ___) => Container(
-                                        color: const Color(0xFFF5F5F5),
-                                        child: const Icon(
-                                          Icons.image_not_supported,
-                                          size: 40,
-                                          color: Color(0xFF999999),
-                                        ),
-                                      ),
                                     )
                                   : const Icon(
                                       Icons.shopping_bag,

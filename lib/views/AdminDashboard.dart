@@ -37,20 +37,13 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
   Widget _buildDrawer(BuildContext context, Map<String, dynamic>? currentUser) {
     return Drawer(
-      backgroundColor: Colors.grey.shade900,
+      backgroundColor: const Color(0xFFFFFFFF),
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Colors.blueAccent,
-                  Colors.blue.shade700,
-                ],
-              ),
+            decoration: const BoxDecoration(
+              color: Color(0xFFFFFFFF),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,15 +54,15 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   height: 60,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white.withValues(alpha: 0.2),
+                    color: const Color(0xFF000000).withValues(alpha: 0.1),
                   ),
                   child: const Icon(
                     Icons.admin_panel_settings,
                     size: 30,
-                    color: Colors.white,
+                    color: Color(0xFF000000),
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 16),
                 Text(
                   currentUser != null
                       ? (currentUser['firstName'] != null || currentUser['lastName'] != null
@@ -77,16 +70,17 @@ class _AdminDashboardState extends State<AdminDashboard> {
                           : currentUser['username'] ?? currentUser['email'] ?? 'Admin')
                       : 'Admin',
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Color(0xFF000000),
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 0.5,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   currentUser?['email'] ?? 'admin@admin.com',
-                  style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.8),
+                  style: const TextStyle(
+                    color: Color(0xFF666666),
                     fontSize: 14,
                   ),
                 ),
@@ -94,37 +88,39 @@ class _AdminDashboardState extends State<AdminDashboard> {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.person, color: Colors.blueAccent),
-            title: const Text('Mon Profil', style: TextStyle(color: Colors.white)),
+            leading: const Icon(Icons.person, color: Color(0xFF000000)),
+            title: const Text('Mon Profil', style: TextStyle(color: Color(0xFF000000))),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).pushNamed('/admin-profile');
             },
           ),
           ListTile(
-            leading: const Icon(Icons.settings, color: Colors.blueAccent),
-            title: const Text('Paramètres', style: TextStyle(color: Colors.white)),
+            leading: const Icon(Icons.settings, color: Color(0xFF000000)),
+            title: const Text('Paramètres', style: TextStyle(color: Color(0xFF000000))),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).pushNamed('/admin-settings');
             },
           ),
-          const Divider(color: Colors.grey),
+          const Divider(color: Color(0xFFE5E5E5)),
           const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
-              'Gestion',
+              'GESTION',
               style: TextStyle(
-                color: Colors.grey,
+                color: Color(0xFF666666),
                 fontSize: 12,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.2,
               ),
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.people, color: Colors.blueAccent),
-            title: const Text('Utilisateurs', style: TextStyle(color: Colors.white)),
+            leading: const Icon(Icons.people, color: Color(0xFF000000)),
+            title: const Text('Utilisateurs', style: TextStyle(color: Color(0xFF000000))),
             selected: _selectedIndex == 0,
+            selectedTileColor: const Color(0xFF000000).withValues(alpha: 0.1),
             onTap: () {
               Navigator.pop(context);
               setState(() {
@@ -133,9 +129,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.category, color: Colors.blueAccent),
-            title: const Text('Catégories', style: TextStyle(color: Colors.white)),
+            leading: const Icon(Icons.category, color: Color(0xFF000000)),
+            title: const Text('Catégories', style: TextStyle(color: Color(0xFF000000))),
             selected: _selectedIndex == 1,
+            selectedTileColor: const Color(0xFF000000).withValues(alpha: 0.1),
             onTap: () {
               Navigator.pop(context);
               setState(() {
@@ -144,9 +141,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.inventory_2, color: Colors.blueAccent),
-            title: const Text('Produits', style: TextStyle(color: Colors.white)),
+            leading: const Icon(Icons.inventory_2, color: Color(0xFF000000)),
+            title: const Text('Produits', style: TextStyle(color: Color(0xFF000000))),
             selected: _selectedIndex == 2,
+            selectedTileColor: const Color(0xFF000000).withValues(alpha: 0.1),
             onTap: () {
               Navigator.pop(context);
               setState(() {
@@ -154,10 +152,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
               });
             },
           ),
-          const Divider(color: Colors.grey),
+          const Divider(color: Color(0xFFE5E5E5)),
           ListTile(
-            leading: const Icon(Icons.logout, color: Colors.red),
-            title: const Text('Déconnexion', style: TextStyle(color: Colors.red)),
+            leading: const Icon(Icons.logout, color: Color(0xFF000000)),
+            title: const Text('Déconnexion', style: TextStyle(color: Color(0xFF000000))),
             onTap: () {
               Navigator.pop(context);
               MongoDatabase.logout();
@@ -173,19 +171,23 @@ class _AdminDashboardState extends State<AdminDashboard> {
     if (_isLoadingStats) {
       return const Padding(
         padding: EdgeInsets.all(16.0),
-        child: Center(child: CircularProgressIndicator()),
+        child: Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF000000)),
+          ),
+        ),
       );
     }
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(24),
       child: GridView.count(
         crossAxisCount: 2,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
-        childAspectRatio: 1.3,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
+        childAspectRatio: 1.35,
         children: [
           _buildStatCard(
             icon: Icons.people,
@@ -223,41 +225,56 @@ class _AdminDashboardState extends State<AdminDashboard> {
     required Color color,
   }) {
     return Card(
-      color: Colors.grey.shade900,
+      color: const Color(0xFFFFFFFF),
+      elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(0),
+        side: const BorderSide(color: Color(0xFF000000), width: 1.5),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: color, size: 28),
-            const SizedBox(height: 10),
-            Flexible(
-              child: Text(
-                value,
-                style: TextStyle(
-                  color: color,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+            Container(
+              width: 44,
+              height: 44,
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: const Color(0xFF000000).withValues(alpha: 0.1),
+                border: Border.all(
+                  color: const Color(0xFF000000),
+                  width: 1.5,
                 ),
-                overflow: TextOverflow.ellipsis,
               ),
+              child: Icon(icon, color: const Color(0xFF000000), size: 22),
             ),
-            const SizedBox(height: 6),
-            Flexible(
-              child: Text(
-                label,
-                style: TextStyle(
-                  color: Colors.grey.shade400,
-                  fontSize: 11,
-                ),
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+            const SizedBox(height: 8),
+            Text(
+              value,
+              style: const TextStyle(
+                color: Color(0xFF000000),
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.8,
+                height: 1.0,
               ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 2),
+            Text(
+              label.toUpperCase(),
+              style: const TextStyle(
+                color: Color(0xFF666666),
+                fontSize: 9,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.0,
+                height: 1.0,
+              ),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
@@ -286,16 +303,16 @@ class _AdminDashboardState extends State<AdminDashboard> {
       drawer: _buildDrawer(context, currentUser),
       appBar: AppBar(
         title: const Text('Admin Dashboard'),
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFFFFFFFF),
+        foregroundColor: const Color(0xFF000000),
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh, color: Color(0xFF000000)),
             tooltip: 'Rafraîchir',
             onPressed: _loadStatistics,
           ),
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.logout, color: Color(0xFF000000)),
             tooltip: 'Déconnexion',
             onPressed: () {
               MongoDatabase.logout();
@@ -305,7 +322,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
         ],
       ),
       body: Container(
-        color: Colors.black,
+        color: const Color(0xFFFFFFFF),
         child: _selectedIndex == 0
             ? Column(
                 children: [
@@ -318,9 +335,13 @@ class _AdminDashboardState extends State<AdminDashboard> {
             : _buildCurrentScreen(),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.grey.shade900,
-        selectedItemColor: Colors.blueAccent,
-        unselectedItemColor: Colors.grey,
+        backgroundColor: const Color(0xFFFFFFFF),
+        selectedItemColor: const Color(0xFF000000),
+        unselectedItemColor: const Color(0xFF666666),
+        selectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.5,
+        ),
         currentIndex: _selectedIndex,
         onTap: (index) {
           setState(() {

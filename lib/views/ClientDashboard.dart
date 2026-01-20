@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:miniprojet/services/database.dart';
 import 'package:miniprojet/services/ShoppingCartService.dart';
 import 'package:miniprojet/services/FavoritesService.dart';
+import 'package:miniprojet/widgets/network_image_widget.dart';
 
 class ClientDashboard extends StatefulWidget {
   final String? initialCategory;
@@ -62,48 +63,94 @@ class _ClientDashboardState extends State<ClientDashboard> {
       return;
     }
 
-    final snapshot = await MongoDatabase.db.collection(MongoDatabase.productCollectionName).get();
-    final products = snapshot.docs.map((doc) {
-      final data = doc.data();
-      data['_id'] = doc.id;
-      return data;
-    }).toList();
-
-    products.sort((a, b) {
-      final aDate = a['createdAt'];
-      final bDate = b['createdAt'];
-      if (aDate == null && bDate == null) return 0;
-      if (aDate == null) return 1;
-      if (bDate == null) return -1;
-      return (bDate as Comparable).compareTo(aDate);
-    });
-
-    final categoriesSet = <String>{};
-    for (var product in products) {
-      final category = product['category']?.toString();
-      if (category != null && category.isNotEmpty) {
-        categoriesSet.add(category);
+    try {
+      final products = await MongoDatabase.getAllProducts();
+      
+      // Debug: vérifier les images
+      int productsWithImages = 0;
+      int productsWithoutImages = 0;
+      List<String> sampleUrls = [];
+      for (var product in products) {
+        final imageField = product['image'];
+        if (imageField != null && 
+            imageField.toString().trim().isNotEmpty &&
+            (imageField.toString().startsWith('http://') || 
+             imageField.toString().startsWith('https://'))) {
+          productsWithImages++;
+          if (sampleUrls.length < 3) {
+            sampleUrls.add(imageField.toString().trim());
+          }
+        } else {
+          productsWithoutImages++;
+          if (productsWithoutImages <= 3) {
+            debugPrint('⚠️ Produit "${product['title']}" sans image valide: $imageField (type: ${imageField?.runtimeType})');
+          }
+        }
       }
-    }
-    final categories = categoriesSet.toList()..sort();
-
-    setState(() {
-      _allProducts = products;
-      _categories = categories;
-      _selectedCategory = widget.initialCategory;
-      if (widget.initialCategory != null) {
-        _filteredProducts = _allProducts
-            .where((p) => p['category']?.toString() == widget.initialCategory)
-            .toList();
-      } else {
-        _filteredProducts = products;
+      debugPrint('📊 Images: $productsWithImages produits avec images, $productsWithoutImages sans images');
+      if (sampleUrls.isNotEmpty) {
+        debugPrint('📸 Exemples d\'URLs d\'images:');
+        for (var url in sampleUrls) {
+          debugPrint('   - $url');
+          // Vérifier la longueur de l'URL
+          debugPrint('     Longueur: ${url.length} caractères');
+          // Vérifier si l'URL contient des caractères spéciaux
+          if (url.contains(' ')) {
+            debugPrint('     ⚠️ ATTENTION: L\'URL contient des espaces!');
+          }
+        }
       }
-      _currentPage = 0;
-      _isLoading = false;
-    });
-    
-    if (_searchQuery.isNotEmpty) {
-      _performSearch(_searchQuery);
+      
+      // Afficher un exemple de produit complet pour débogage
+      if (products.isNotEmpty) {
+        final firstProduct = products.first;
+        debugPrint('📦 Exemple de produit complet:');
+        debugPrint('   Titre: ${firstProduct['title']}');
+        debugPrint('   Image: ${firstProduct['image']}');
+        debugPrint('   Type image: ${firstProduct['image']?.runtimeType}');
+      }
+
+      products.sort((a, b) {
+        final aDate = a['createdAt'];
+        final bDate = b['createdAt'];
+        if (aDate == null && bDate == null) return 0;
+        if (aDate == null) return 1;
+        if (bDate == null) return -1;
+        return (bDate as Comparable).compareTo(aDate);
+      });
+
+      final categoriesSet = <String>{};
+      for (var product in products) {
+        final category = product['category']?.toString();
+        if (category != null && category.isNotEmpty) {
+          categoriesSet.add(category);
+        }
+      }
+      final categories = categoriesSet.toList()..sort();
+
+      setState(() {
+        _allProducts = products;
+        _categories = categories;
+        _selectedCategory = widget.initialCategory;
+        if (widget.initialCategory != null) {
+          _filteredProducts = _allProducts
+              .where((p) => p['category']?.toString() == widget.initialCategory)
+              .toList();
+        } else {
+          _filteredProducts = products;
+        }
+        _currentPage = 0;
+        _isLoading = false;
+      });
+      
+      if (_searchQuery.isNotEmpty) {
+        _performSearch(_searchQuery);
+      }
+    } catch (e) {
+      debugPrint('❌ Erreur lors du chargement des produits: $e');
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -660,39 +707,37 @@ class _ClientDashboardState extends State<ClientDashboard> {
                                               decoration: const BoxDecoration(
                                                 color: Color(0xFFF5F5F5),
                                               ),
-                                              child: p['image'] != null
-                                                  ? Image.network(
-                                                      p['image'],
+                                              child: (p['image'] != null && 
+                                                      p['image'].toString().trim().isNotEmpty &&
+                                                      (p['image'].toString().startsWith('http://') || 
+                                                       p['image'].toString().startsWith('https://')))
+                                                  ? NetworkImageWidget(
+                                                      imageUrl: p['image'].toString().trim(),
                                                       width: double.infinity,
                                                       height: double.infinity,
                                                       fit: BoxFit.contain,
-                                                      loadingBuilder: (context, child, loadingProgress) {
-                                                        if (loadingProgress == null) return child;
-                                                        return Container(
-                                                          color: const Color(0xFFF5F5F5),
-                                                          child: const Center(
-                                                            child: CircularProgressIndicator(
-                                                              strokeWidth: 2,
-                                                              valueColor: AlwaysStoppedAnimation<Color>(
-                                                                Color(0xFF000000),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                      errorBuilder: (_, __, ___) => Container(
-                                                        color: const Color(0xFFF5F5F5),
-                                                        child: const Icon(
-                                                          Icons.image_not_supported,
-                                                          size: 40,
-                                                          color: Color(0xFF999999),
-                                                        ),
-                                                      ),
                                                     )
-                                                  : const Icon(
-                                                      Icons.shopping_bag,
-                                                      size: 40,
-                                                      color: Color(0xFF999999),
+                                                  : Container(
+                                                      color: const Color(0xFFF5F5F5),
+                                                      child: const Column(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons.shopping_bag,
+                                                            size: 48,
+                                                            color: Color(0xFF999999),
+                                                          ),
+                                                          SizedBox(height: 8),
+                                                          Text(
+                                                            'Aucune image',
+                                                            style: TextStyle(
+                                                              color: Color(0xFF999999),
+                                                              fontSize: 10,
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                             ),
                                             if (p['discountPercentage'] != null)
